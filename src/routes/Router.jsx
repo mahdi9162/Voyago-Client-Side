@@ -8,6 +8,7 @@ import AllVehicles from '../Pages/Vehicles/AllVehicles';
 import AddVehicle from '../Pages/Vehicles/AddVehicle';
 import MyVehicles from '../Pages/Vehicles/MyVehicles';
 import MyBookings from '../Pages/Bookings/MyBookings';
+import NotFound from '../Pages/Error/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: '/register',
         Component: Register,
+      },
+      {
+        path: '*',
+        Component: NotFound,
       },
     ],
   },
