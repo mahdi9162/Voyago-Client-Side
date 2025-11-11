@@ -1,2 +1,52 @@
-@import "tailwindcss";
-@plugin "daisyui";
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&display=swap');
+
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: light --default;
+}
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *))
+
+:root {
+  /* 🌙 Dark Mode Colors (Default) */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #ffffff;
+  --text-muted: #94a3b8;
+  --accent: #3b82f6;
+  --accent-cyan: #22d3ee;
+  --accent-purple: #6366f1;
+  --shadow: rgba(37, 99, 235, 0.4);
+
+  /* Gradient */
+  --gradient: linear-gradient(90deg, #22d3ee, #3b82f6, #6366f1);
+}
+
+/* ☀️ Light Mode Override */
+[data-theme='light'] {
+  --bg-primary: #f9fafb;
+  --bg-secondary: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-muted: #64748b;
+  --accent: #2563eb;
+  --accent-cyan: #0ea5e9;
+  --accent-purple: #7c3aed;
+  --shadow: rgba(37, 99, 235, 0.15);
+
+  /* Gradient for light mode */
+  --gradient: linear-gradient(90deg, #2563eb, #1e40af);
+}
+
+html,
+body {
+  font-family: 'Manrope', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Exo 2', sans-serif;
+}
