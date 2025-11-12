@@ -3,21 +3,22 @@
 
 @import 'tailwindcss';
 @plugin "daisyui" {
-  themes: light --default;
+  themes: winter --default, dark --prefersdark;
 }
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *))
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
   /* 🌙 Dark Mode Colors (Default) */
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
   --text-primary: #ffffff;
-  --text-muted: #94a3b8;
+  --text-muted: #d9dee7;
   --accent: #3b82f6;
   --accent-cyan: #22d3ee;
   --accent-purple: #6366f1;
   --shadow: rgba(37, 99, 235, 0.4);
-
+  --nav-active: #0ea5e9;
   /* Gradient */
   --gradient: linear-gradient(90deg, #22d3ee, #3b82f6, #6366f1);
 }
@@ -27,12 +28,12 @@
   --bg-primary: #f9fafb;
   --bg-secondary: #e2e8f0;
   --text-primary: #1e293b;
-  --text-muted: #64748b;
+  --text-muted: #6b7280;
   --accent: #2563eb;
   --accent-cyan: #0ea5e9;
   --accent-purple: #7c3aed;
   --shadow: rgba(37, 99, 235, 0.15);
-
+  --nav-active: #0ea5e9;
   /* Gradient for light mode */
   --gradient: linear-gradient(90deg, #2563eb, #1e40af);
 }
@@ -49,4 +50,37 @@ h4,
 h5,
 h6 {
   font-family: 'Exo 2', sans-serif;
+}
+
+/* Navbar */
+
+.navlink-style {
+  @apply relative px-4 py-2 text-sm font-medium transition-all duration-500
+         top-0 left-0 right-0 z-50 w-full
+         bg-black/10 backdrop-blur-md rounded-2xl;
+  color: var(--text-muted);
+}
+
+/* 🔵 Active link */
+.active-style {
+  @apply relative drop-shadow-[0_0_8px_rgba(56,189,248,0.35)] text-base
+         before:content-[""] before:absolute before:-bottom-1
+         before:left-1/2 before:-translate-x-1/2 before:w-3/5
+         before:h-0.5 before:rounded-full font-bold;
+  color: var(--nav-active);
+}
+
+.active-style::before {
+  background-color: var(--nav-active);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+/* ⚪ Inactive links */
+.inActive-style {
+  @apply transition-all duration-300;
+}
+
+/* hover করলে একই রঙে যাবে */
+.inActive-style:hover {
+  color: var(--nav-active);
 }
