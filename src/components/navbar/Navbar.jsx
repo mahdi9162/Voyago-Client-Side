@@ -101,11 +101,11 @@ const Navbar = () => {
                 <div className="leading-tight -ml-1">
                   <h2 className="text-lg md:text-xl -ml-3 font-extrabold tracking-tight text-(--accent-cyan)">
                     Voyago
-                    {/* subtitle শুধু md+ এ দেখাবো */}
+                    {/* subtitle */}
                     <span className=" hidden md:block lg:inline text-sm font-medium text-(--text-muted)"> — Smart Vehicle Booking Platform</span>
                   </h2>
 
-                  {/* tagline শুধু lg+ এ দেখাবো */}
+                  {/* tagline */}
                   <p className="hidden lg:block text-xs text-(--text-muted)">Where Every Journey Feels Effortless.</p>
                 </div>
               </Link>
@@ -140,7 +140,7 @@ const Navbar = () => {
               <ThemeToggle />
             </div>
 
-            {/* Theme toggle mobile e o dekhate chaile */}
+            {/* Theme toggle  */}
             <div className="navbar-end lg:hidden">
               <ThemeToggle />
             </div>
