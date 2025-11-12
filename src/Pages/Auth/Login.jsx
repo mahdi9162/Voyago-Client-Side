@@ -5,10 +5,48 @@ import loginImgDark from '../../assets/images/loginDark.jpg';
 import { Link } from 'react-router';
 import LoginButton from '../../components/ui/LoginButton';
 import { ThemeContext } from '../../context/ThemeProvider';
+import { AuthContext } from '../../context/AuthProvider';
+import GoogleButton from '../../components/ui/GoogleButton';
 
 const Login = () => {
   const { theme } = use(ThemeContext);
+  const { setLoading, setUser, userSignin, userLoginWithGoogle } = use(AuthContext);
   const loginImage = theme === 'dark' ? loginImgDark : loginImgLight;
+
+  const handleEmailPassLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    userSignin(email, password)
+      .then((res) => {
+        const loginUser = res.user;
+        setUser(loginUser);
+        form.reset();
+        alert('Successfully Login');
+      })
+      .catch((error) => {
+        if (error.code === 'auth/invalid-credential') {
+          return alert('Invalid email or password. Please try again.');
+        }
+      })
+      .finally(() => setLoading(false));
+  };
+
+  // user Google Login
+  const handleGoogleLogin = () => {
+    userLoginWithGoogle()
+      .then((res) => {
+        const loginUser = res.user;
+        setUser(loginUser);
+        alert('Successfully login');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => setLoading(false));
+  };
 
   return (
     <>
@@ -20,7 +58,7 @@ const Login = () => {
               <h3 className="text-xl md:text-3xl font-semibold text-(--text-primary)">Welcome back to Voyago !</h3>
               <p className="mt-3 text-xs md:text-base text-(--text-muted)">Sign in to continue your Voyago journey.</p>
 
-              <form className="mt-6">
+              <form onSubmit={handleEmailPassLogin} className="mt-6">
                 <div className="rounded-2xl border border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-md p-6 md:p-8">
                   <div className="space-y-5">
                     {/* Email */}
@@ -81,9 +119,13 @@ const Login = () => {
                   </div>
                 </div>
               </form>
+              <div className="-mt-6 px-6 md:px-8 pb-8 rounded-b-2xl border-x border-b border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-md">
+                <p className="text-center mb-1 text-(--text-muted)">Or</p>
+                <GoogleButton onClick={handleGoogleLogin} />
+              </div>
             </div>
             {/* Login Form End */}
-            <div className="flex-2 relative aspect-16/10 md:aspect-video rounded-r-4xl overflow-hidden hidden lg:block">
+            <div className="w-[60%] relative h-[550px] lg:h-[700px] rounded-r-4xl overflow-hidden hidden lg:block">
               <div className="absolute inset-0 bg-black/10 "></div>
               <img src={loginImage} className="flex-2 absolute inset-0 h-full w-full object-cover" alt="" />
             </div>

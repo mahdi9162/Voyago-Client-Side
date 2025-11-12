@@ -13,7 +13,7 @@ import GoogleButton from '../../components/ui/GoogleButton';
 
 const Signup = () => {
   const { theme } = use(ThemeContext);
-  const { setUser, setLoading, loading, userSignup, userLoginWithGoogle } = use(AuthContext);
+  const { setUser, setLoading, userSignup, userLoginWithGoogle } = use(AuthContext);
   const [passwordError, setPasswordError] = useState('');
   const loginImage = theme === 'dark' ? signupDark : signupLight;
 
