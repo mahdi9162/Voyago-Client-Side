@@ -18,7 +18,7 @@ const Login = () => {
             {/* Login Form Start */}
             <div className="flex-1 px-6 md:px-10 my-10">
               <h3 className="text-xl md:text-3xl font-semibold text-(--text-primary)">Welcome back to Voyago !</h3>
-              <p className="mt-1 text-xs md:text-base text-(--text-muted)">Sign in to continue your Voyago journey.</p>
+              <p className="mt-3 text-xs md:text-base text-(--text-muted)">Sign in to continue your Voyago journey.</p>
 
               <form className="mt-6">
                 <div className="rounded-2xl border border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-md p-6 md:p-8">
