@@ -10,7 +10,8 @@ import GoogleButton from '../../components/ui/GoogleButton';
 
 const Login = () => {
   const { theme } = use(ThemeContext);
-  const { setLoading, setUser, userSignin, userLoginWithGoogle } = use(AuthContext);
+  const { user, setLoading, setUser, userSignin, userLoginWithGoogle } = use(AuthContext);
+
   const loginImage = theme === 'dark' ? loginImgDark : loginImgLight;
 
   const handleEmailPassLogin = (e) => {
