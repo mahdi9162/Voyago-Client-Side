@@ -6,9 +6,12 @@ import lightLogo from '../../assets/images/logo2.webp';
 import darkLogo from '../../assets/images/logo.webp';
 import ThemeToggle from '../ui/ThemeToggle';
 import { ThemeContext } from '../../context/ThemeProvider';
+import { AuthContext } from '../../context/AuthProvider';
+import { notifyError, notifySuccess } from '../../utils/toastService';
 
 const Navbar = () => {
   const { theme } = use(ThemeContext);
+  const { UserSignOut, user } = use(AuthContext);
   const links = (
     <>
       <li>
@@ -40,6 +43,17 @@ const Navbar = () => {
   );
   const logoSrc = theme === 'dark' ? darkLogo : lightLogo;
 
+  // User Signout
+  const handleUserSignout = () => {
+    UserSignOut()
+      .then(() => {
+        notifySuccess('👋 You’ve been logged out successfully. See you next time on Voyago!');
+      })
+      .catch((error) => {
+        notifyError('⚠️ Logout failed! Please try again.');
+        console.log(error);
+      });
+  };
   return (
     <>
       <nav className="bg-base-100 shadow-sm">
@@ -88,22 +102,28 @@ const Navbar = () => {
               <ul className="menu menu-horizontal gap-4 px-1">{links}</ul>
             </div>
             <div className="navbar-end gap-4">
-              <Link
-                to="/login"
-                className="px-5 py-2 text-sm font-medium rounded-lg border 
+              {user ? (
+                <Link
+                  onClick={handleUserSignout}
+                  className="px-5 py-2 text-sm font-medium rounded-lg border 
                      border-(--accent-cyan) text-(--accent-cyan) 
                      hover:bg-(--accent-cyan) hover:text-white 
                      transition-all duration-300 shadow-sm "
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="px-5 py-2 text-sm font-semibold rounded-lg 
-                     bg-(--accent-cyan) text-white 
-                     hover:bg-(--accent) hover:shadow-[0_0_12px_rgba(14,165,233,0.5)] 
-                     transition-all duration-300"
-              >
+                >
+                  Logout
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="px-5 py-2 text-sm font-medium rounded-lg border 
+                     border-(--accent-cyan) text-(--accent-cyan) 
+                     hover:bg-(--accent-cyan) hover:text-white 
+                     transition-all duration-300 shadow-sm "
+                >
+                  Login
+                </Link>
+              )}
+              <Link to="/signup" className={user ? 'hidden' : 'signout-btn-style'}>
                 Signup
               </Link>
               <div className="hidden lg:flex">

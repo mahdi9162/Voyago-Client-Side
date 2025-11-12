@@ -2,16 +2,17 @@ import React, { use } from 'react';
 import Container from '../../components/container/Container';
 import loginImgLight from '../../assets/images/LightLogin.jpg';
 import loginImgDark from '../../assets/images/loginDark.jpg';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import LoginButton from '../../components/ui/LoginButton';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
 import GoogleButton from '../../components/ui/GoogleButton';
+import { notifyError, notifySuccess } from '../../utils/toastService';
 
 const Login = () => {
   const { theme } = use(ThemeContext);
-  const { user, setLoading, setUser, userSignin, userLoginWithGoogle } = use(AuthContext);
-
+  const { setLoading, setUser, userSignin, userLoginWithGoogle } = use(AuthContext);
+  const navigate = useNavigate();
   const loginImage = theme === 'dark' ? loginImgDark : loginImgLight;
 
   const handleEmailPassLogin = (e) => {
@@ -20,16 +21,18 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+    // User Signin
     userSignin(email, password)
       .then((res) => {
         const loginUser = res.user;
         setUser(loginUser);
+        notifySuccess(`Logged in successfully! Welcome back ${loginUser?.displayName || 'there'} 🚀`);
+        navigate('/');
         form.reset();
-        alert('Successfully Login');
       })
       .catch((error) => {
         if (error.code === 'auth/invalid-credential') {
-          return alert('Invalid email or password. Please try again.');
+          return notifyError('⚠️ Login failed! Check your credentials.');
         }
       })
       .finally(() => setLoading(false));
@@ -41,9 +44,11 @@ const Login = () => {
       .then((res) => {
         const loginUser = res.user;
         setUser(loginUser);
-        alert('Successfully login');
+        notifySuccess(`Logged in successfully! Welcome back ${loginUser?.displayName || 'there'} 🚀`);
+        navigate('/');
       })
       .catch((error) => {
+        notifyError('⚠️ Login failed! Check your credentials.');
         console.log(error);
       })
       .finally(() => setLoading(false));

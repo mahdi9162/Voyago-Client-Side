@@ -2,7 +2,7 @@ import React, { use, useState } from 'react';
 import Container from '../../components/container/Container';
 import signupLight from '../../assets/images/signupLight.jpg';
 import signupDark from '../../assets/images/signupDark.jpg';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import LoginButton from '../../components/ui/LoginButton';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
@@ -10,11 +10,13 @@ import { validatePassword } from '../../utils/validation';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import GoogleButton from '../../components/ui/GoogleButton';
+import { notifyError, notifySuccess } from '../../utils/toastService';
 
 const Signup = () => {
   const { theme } = use(ThemeContext);
   const { setUser, setLoading, userSignup, userLoginWithGoogle } = use(AuthContext);
   const [passwordError, setPasswordError] = useState('');
+  const navigate = useNavigate();
   const loginImage = theme === 'dark' ? signupDark : signupLight;
 
   const handleSignupWithEmailPass = (e) => {
@@ -33,17 +35,18 @@ const Signup = () => {
       setPasswordError(validationMsg);
       return;
     }
-
     setPasswordError('');
+
     // User Signup with email and password
     userSignup(email, password)
       .then((res) => {
         const loginUser = res.user;
         setUser(loginUser);
-        alert('Successfully Signup');
+        notifySuccess(`🎉 Signup successful! Welcome aboard, ${loginUser?.displayName || 'there'} !`);
+        navigate('/');
       })
       .catch((error) => {
-        console.log(error);
+        notifyError(`❌ Signup failed! ${error.message}`);
       })
       .finally(() => setLoading(false));
   };
@@ -53,10 +56,11 @@ const Signup = () => {
       .then((res) => {
         const loginUser = res.user;
         setUser(loginUser);
-        alert('Successfully Signup');
+        notifySuccess(`🎉 Welcome to Voyago ${loginUser?.displayName || 'there'} ! Your account was created successfully via Google.🚀`);
+        navigate('/');
       })
       .catch((error) => {
-        console.log(error);
+        notifyError(`❌ Signup failed! ${error.message}`);
       })
       .finally(() => setLoading(false));
   };
@@ -65,7 +69,7 @@ const Signup = () => {
     <>
       <Container>
         <section className="bg-(--bg-primary) rounded-4xl">
-          <div className="flex lg:items-center justify-between my-10 flex-col lg:flex-row ">
+          <div className="flex lg:items-center justify-between my-20 flex-col lg:flex-row ">
             {/* Login Form Start */}
             <div className="lg:w-[35%] px-6 md:px-10">
               <h3 className="text-xl md:text-3xl font-semibold text-(--text-primary)">Sign up for Voyago !</h3>
