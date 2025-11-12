@@ -7,11 +7,13 @@ import LoginButton from '../../components/ui/LoginButton';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
 import { validatePassword } from '../../utils/validation';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import GoogleButton from '../../components/ui/GoogleButton';
 
 const Signup = () => {
   const { theme } = use(ThemeContext);
-  const { setUser, setLoading, loading, userSignup } = use(AuthContext);
+  const { setUser, setLoading, loading, userSignup, userLoginWithGoogle } = use(AuthContext);
   const [passwordError, setPasswordError] = useState('');
   const loginImage = theme === 'dark' ? signupDark : signupLight;
 
@@ -33,8 +35,21 @@ const Signup = () => {
     }
 
     setPasswordError('');
-
+    // User Signup with email and password
     userSignup(email, password)
+      .then((res) => {
+        const loginUser = res.user;
+        setUser(loginUser);
+        alert('Successfully Signup');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => setLoading(false));
+  };
+  // user Google Login
+  const handleGoogleLogin = () => {
+    userLoginWithGoogle()
       .then((res) => {
         const loginUser = res.user;
         setUser(loginUser);
@@ -50,15 +65,15 @@ const Signup = () => {
     <>
       <Container>
         <section className="bg-(--bg-primary) rounded-4xl">
-          <div className="flex lg:items-center justify-between my-20 flex-col lg:flex-row ">
+          <div className="flex lg:items-center justify-between my-10 flex-col lg:flex-row ">
             {/* Login Form Start */}
-            <div className="lg:w-[35%] px-6 md:px-10 my-10">
+            <div className="lg:w-[35%] px-6 md:px-10">
               <h3 className="text-xl md:text-3xl font-semibold text-(--text-primary)">Sign up for Voyago !</h3>
               <p className="mt-3 text-xs md:text-base text-(--text-muted)">Start your effortless journey today.</p>
 
-              <form onSubmit={handleSignupWithEmailPass} className="mt-6">
+              <form onSubmit={handleSignupWithEmailPass} className="mt-4">
                 <div className="rounded-2xl border border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-md p-6 md:p-8">
-                  <div className="space-y-5">
+                  <div className="space-y-4">
                     {/* Name */}
                     <div>
                       <label className="label block text-sm font-medium text-(--text-muted)">Name</label>
@@ -140,7 +155,7 @@ const Signup = () => {
                     </div>
 
                     {/* Links */}
-                    <div className="pt-1">
+                    <div>
                       <p className=" text-xs text-center lg:text-left text-(--text-muted)">
                         Already have an account ?{' '}
                         <Link to="/login" className="font-semibold text-(--accent) hover:text-(--accent-cyan)">
@@ -148,12 +163,16 @@ const Signup = () => {
                         </Link>
                       </p>
                     </div>
-                    <div className="pt-2 w-full">
+                    <div className="w-full ">
                       <LoginButton>Signup</LoginButton>
                     </div>
                   </div>
                 </div>
               </form>
+              <div className="-mt-6 px-6 md:px-8 pb-8 rounded-b-2xl border-x border-b border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-md">
+                <p className="text-center mb-1 text-(--text-muted)">Or</p>
+                <GoogleButton onClick={handleGoogleLogin} />
+              </div>
             </div>
             {/* Login Form End */}
             <div className="w-[60%] relative h-[550px] lg:h-[700px] rounded-r-4xl overflow-hidden hidden lg:block">

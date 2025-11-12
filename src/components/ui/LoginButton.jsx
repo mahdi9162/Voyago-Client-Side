@@ -12,7 +12,7 @@ const Button = ({ children }) => {
 const StyledWrapper = styled.div`
   button {
     width: 100%;
-    padding: 12.5px 30px;
+    padding: 10px 30px;
     border: 0;
     border-radius: 100px;
     background-color: #2ba8fb;
