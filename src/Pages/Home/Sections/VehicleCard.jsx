@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 
 const VehicleCard = ({ vehicle }) => {
   const { theme } = use(ThemeContext);
-  console.log(vehicle);
 
   const { _id, vehicleName, vehicleModel, pricePerDay, fuelType, transmission, seats, coverImage } = vehicle || {};
 

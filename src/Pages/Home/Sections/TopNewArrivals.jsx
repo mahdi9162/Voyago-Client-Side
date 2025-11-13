@@ -5,7 +5,7 @@ import VehicleCard from './VehicleCard';
 import { Link } from 'react-router';
 import { ThemeContext } from '../../../context/ThemeProvider';
 
-const LatestVehiclesSec = () => {
+const TopNewArrivals = () => {
   const { theme } = use(ThemeContext);
   const { vehicles, loading, error } = useVehicles('http://localhost:3000/latest-vehicles/');
   const latestVehicles = vehicles.data;
@@ -41,4 +41,4 @@ const LatestVehiclesSec = () => {
   );
 };
 
-export default LatestVehiclesSec;
+export default TopNewArrivals;
