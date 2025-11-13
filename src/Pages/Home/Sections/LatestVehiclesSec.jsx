@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import { ThemeContext } from '../../../context/ThemeProvider';
 
 const LatestVehiclesSec = () => {
-    const { theme } = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   const { vehicles, loading, error } = useVehicles('http://localhost:3000/latest-vehicles/');
   const latestVehicles = vehicles.data;
 
@@ -20,14 +20,12 @@ const LatestVehiclesSec = () => {
 
   return (
     <>
-      <section className="my-20 px-3 lg:px-0">
+      <section className="my-30 px-3 lg:px-0">
         <Container>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-semibold text-(--text-primary)">Top New Arrivals</h2>
 
-            <Link
-              to="/all-vehicles"
-              className={theme === 'dark' ? 'dark-view' : 'light-view'}>
+            <Link to="/all-vehicles" className={theme === 'dark' ? 'dark-view' : 'light-view'}>
               View all
             </Link>
           </div>

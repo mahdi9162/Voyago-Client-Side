@@ -106,3 +106,13 @@ h6 {
 .light-view {
   @apply px-2 md:px-5 py-1 md:py-1.5 rounded-xl font-medium text-xs md:text-sm bg-(--accent-cyan) text-white border border-(--accent-cyan) transition-all duration-500 hover:bg-transparent hover:text-(--accent) hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:scale-105 active:scale-95 cursor-pointer;
 }
+
+/* Featured Owner Style */
+.darkGlow {
+  @apply border border-cyan-400/30 shadow-inner rounded-3xl;
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.25), inset 0 0 40px rgba(34, 211, 238, 0.08);
+}
+.lightGlow {
+  @apply border border-gray-300/60 shadow-inner rounded-3xl;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.07), inset 0 0 25px rgba(255, 255, 255, 0.5);
+}

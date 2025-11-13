@@ -36,7 +36,7 @@ const TopCategories = () => {
 
   return (
     <>
-      <section className="my-16 md:my-20 px-3 lg:px-0">
+      <section className="my-16 md:my-30 px-3 lg:px-0">
         <Container>
           {/* Header */}
           <div className="flex items-center flex-col md:flex-row text-center md:text-left  md:justify-between gap-4 mb-8">
