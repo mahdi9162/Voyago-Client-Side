@@ -1,0 +1,46 @@
+import React, { use } from 'react';
+import useVehicles from '../../../hooks/useVehicles';
+import Container from '../../../components/container/Container';
+import VehicleCard from './VehicleCard';
+import { Link } from 'react-router';
+import { ThemeContext } from '../../../context/ThemeProvider';
+
+const LatestVehiclesSec = () => {
+    const { theme } = use(ThemeContext);
+  const { vehicles, loading, error } = useVehicles('http://localhost:3000/latest-vehicles/');
+  const latestVehicles = vehicles.data;
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  return (
+    <>
+      <section className="my-20 px-3 lg:px-0">
+        <Container>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-semibold text-(--text-primary)">Top New Arrivals</h2>
+
+            <Link
+              to="/all-vehicles"
+              className={theme === 'dark' ? 'dark-view' : 'light-view'}>
+              View all
+            </Link>
+          </div>
+
+          <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {latestVehicles.map((vehicle) => (
+              <VehicleCard key={vehicle._id} vehicle={vehicle} />
+            ))}
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+};
+
+export default LatestVehiclesSec;

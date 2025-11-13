@@ -96,3 +96,14 @@ h6 {
   color: #ffffff;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
+
+/* Latest Car view details Button*/
+.dark-view {
+  @apply px-5 py-1.5 rounded-xl font-medium text-sm border border-(--accent-cyan) text-(--text-muted)
+    bg-transparent transition-all duration-200 hover:bg-(--accent-cyan) hover:text-black
+    hover:shadow-[0_8px_20px_rgba(0,0,0,0.45)] hover:scale-105 active:scale-95 cursor-pointer;
+}
+
+.light-view {
+  @apply px-5 py-1.5 rounded-xl font-medium text-sm bg-(--accent-cyan) text-white border border-(--accent-cyan) transition-all duration-200 hover:bg-transparent hover:text-(--accent) hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:scale-105 active:scale-95 cursor-pointer;
+}
