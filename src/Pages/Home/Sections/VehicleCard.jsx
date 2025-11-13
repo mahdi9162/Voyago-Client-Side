@@ -1,6 +1,7 @@
 import React, { use } from 'react';
 import { ThemeContext } from '../../../context/ThemeProvider';
 import { Link } from 'react-router';
+import carImg from '../../../assets/images/carimg.jpg';
 
 const VehicleCard = ({ vehicle }) => {
   const { theme } = use(ThemeContext);
@@ -23,7 +24,7 @@ const VehicleCard = ({ vehicle }) => {
       {/* Image */}
       <div className="h-44 w-full overflow-hidden relative">
         <img
-          src={coverImage}
+          src={coverImage ? coverImage : carImg}
           alt={`${vehicleName} ${vehicleModel}`}
           className="
             h-full w-full object-cover
