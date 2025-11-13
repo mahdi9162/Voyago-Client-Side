@@ -13,7 +13,7 @@ const MyBookings = () => {
   }
 
   return (
-    <section className="my-10 md:my-20 lg:my-30 px-3 lg:px-0">
+    <section className="my-10 md:my-20  px-3 lg:px-0">
       <Container>
         {/* Page Header */}
         <div className="mb-6 md:mb-10">

@@ -2,7 +2,7 @@ import React, { use } from 'react';
 import Container from '../../components/container/Container';
 import loginImgLight from '../../assets/images/LightLogin.jpg';
 import loginImgDark from '../../assets/images/loginDark.jpg';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import LoginButton from '../../components/ui/LoginButton';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
@@ -13,6 +13,9 @@ const Login = () => {
   const { theme } = use(ThemeContext);
   const { setLoading, setUser, userSignin, userLoginWithGoogle } = use(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
   const loginImage = theme === 'dark' ? loginImgDark : loginImgLight;
 
   const handleEmailPassLogin = (e) => {
@@ -27,7 +30,7 @@ const Login = () => {
         const loginUser = res.user;
         setUser(loginUser);
         notifySuccess(`Logged in successfully! Welcome back ${loginUser?.displayName || 'there'} 🚀`);
-        navigate('/');
+        navigate(from, { replace: true });
         form.reset();
       })
       .catch((error) => {

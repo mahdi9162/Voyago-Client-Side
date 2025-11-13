@@ -25,17 +25,26 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/add-vehicle" className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'}`}>
+        <NavLink
+          to="/add-vehicle"
+          className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
+        >
           Add Vehicle
         </NavLink>
       </li>
       <li>
-        <NavLink to="/my-vehicles" className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'}`}>
+        <NavLink
+          to="/my-vehicles"
+          className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
+        >
           My Vehicles
         </NavLink>
       </li>
       <li>
-        <NavLink to="/my-bookings" className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'}`}>
+        <NavLink
+          to="/my-bookings"
+          className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
+        >
           My Bookings
         </NavLink>
       </li>

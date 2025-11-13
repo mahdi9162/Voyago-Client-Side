@@ -10,6 +10,7 @@ import MyBookings from '../Pages/Bookings/MyBookings';
 import NotFound from '../Pages/Error/NotFound';
 import Signup from '../Pages/Auth/Signup';
 import VehicleDetails from '../Pages/Vehicles/VehicleDetails';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +47,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/vehicle-details/:id',
-        element: <VehicleDetails></VehicleDetails>,
+        element: (
+          <PrivateRoute>
+            <VehicleDetails></VehicleDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: '*',
