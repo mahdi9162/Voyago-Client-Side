@@ -3,6 +3,7 @@ import HeroSec from './Sections/HeroSec';
 import TopCategories from './Sections/TopCategories';
 import FeaturedOwner from './Sections/FeaturedOwner';
 import TopNewArrivals from './Sections/TopNewArrivals';
+import AboutVoyago from '../Vehicles/AboutVoyago';
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <TopNewArrivals></TopNewArrivals>
       <TopCategories></TopCategories>
       <FeaturedOwner></FeaturedOwner>
+      <AboutVoyago></AboutVoyago>
     </>
   );
 };

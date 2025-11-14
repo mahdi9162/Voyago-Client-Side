@@ -1,16 +1,36 @@
 import useBookings from '../../hooks/useBookings';
 import Container from '../../components/container/Container';
 import { format } from 'date-fns';
+import { Link, useNavigate } from 'react-router';
+import noBookingsAnimation from '../../assets/images/Stuck gears _ Ignite Animation.json';
+import Lottie from 'lottie-react';
 const MyBookings = () => {
   const { bookings, loading } = useBookings();
+  const navigate = useNavigate();
 
   if (loading) {
-    return <p className="text-center py-20">Checking bookings...</p>;
+    return;
   }
 
   if (bookings.length === 0) {
-    return <p className="text-center text-xl py-20">You have no active ride requests.</p>;
+    return (
+      <div className="py-20 flex flex-col items-center text-center gap-4">
+        <div className="w-32">
+          <Lottie animationData={noBookingsAnimation} loop autoplay />
+        </div>
+        <p className="text-lg text-(--text-muted)">No active ride requests</p>
+        <Link
+          to="/all-vehicles"
+          className="text-sm px-4 py-2 rounded-full bg-(--accent) text-white shadow-md hover:bg-(--accent-cyan) transition duration-500">
+          Browse vehicles
+        </Link>
+      </div>
+    );
   }
+
+  const handleViewDetails = (vehicleId) => {
+    navigate(`/vehicle-details/${vehicleId}`);
+  };
 
   return (
     <section className="my-10 md:my-20  px-3 lg:px-0">
@@ -76,7 +96,10 @@ const MyBookings = () => {
                   <p className="text-xs text-(--text-muted)">Booked on {bookedOnDate}</p>
 
                   {/* CTA */}
-                  <button className="mt-2 inline-flex items-center justify-center rounded-full bg-(--accent) px-5 py-2 text-sm font-semibold text-white shadow-[0_14px_40px_rgba(34,211,238,0.5)] transition-all duration-200 hover:bg-(--accent-cyan) hover:shadow-[0_18px_60px_rgba(34,211,238,0.65)] active:scale-95 cursor-pointer hover:text-black/50">
+                  <button
+                    onClick={() => handleViewDetails(vehicleId)}
+                    className="mt-2 inline-flex items-center justify-center rounded-full bg-(--accent) px-5 py-2 text-sm font-semibold text-white shadow-[0_14px_40px_rgba(34,211,238,0.5)] transition-all duration-200 hover:bg-(--accent-cyan) hover:shadow-[0_18px_60px_rgba(34,211,238,0.65)] active:scale-95 cursor-pointer hover:text-black/50"
+                  >
                     View Details
                   </button>
                 </div>

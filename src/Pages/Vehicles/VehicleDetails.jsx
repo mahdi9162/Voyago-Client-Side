@@ -6,6 +6,7 @@ import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
 import axios from 'axios';
 import { notifyError, notifySuccess } from '../../utils/toastService';
+import Spinner from '../../utils/Spinner';
 
 const VehicleDetails = () => {
   const { theme } = use(ThemeContext);
@@ -18,11 +19,9 @@ const VehicleDetails = () => {
 
   if (loading) {
     return (
-      <section className="py-16">
-        <Container>
-          <p className="text-center text-(--text-muted)">Loading vehicle details...</p>
-        </Container>
-      </section>
+      <div className="mt-20">
+        <Spinner></Spinner>;
+      </div>
     );
   }
 

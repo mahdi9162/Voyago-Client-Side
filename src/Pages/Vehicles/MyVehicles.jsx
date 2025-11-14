@@ -4,21 +4,50 @@ import useMyVehicles from '../../hooks/useMyVehicles';
 import carImg from '../../assets/images/carimg.jpg';
 import { format } from 'date-fns';
 import { AuthContext } from '../../context/AuthProvider';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { notifyError } from '../../utils/toastService';
+import emptyVehicleAnimation from '../../assets/images/Searching for a car.json';
+import Lottie from 'lottie-react';
 
 const MyVehicles = () => {
   const { myVehicles, loading } = useMyVehicles();
   const { user, loading: authLoading } = use(AuthContext);
+  const navigate = useNavigate();
 
   if (authLoading) {
-    return <p className="text-center py-20">Checking bookings...</p>;
+    return;
   }
 
   if (loading) {
-    return <p className="text-center py-20">Checking bookings...</p>;
+    return;
+  }
+
+  if (myVehicles.length === 0) {
+    return (
+      <div className="py-20 flex flex-col items-center text-center gap-4">
+        {/* Animation */}
+        <div className="w-32 opacity-90">
+          <Lottie animationData={emptyVehicleAnimation} loop autoplay />
+        </div>
+
+        {/* Message */}
+        <p className="text-lg font-medium text-(--text-primary)">No vehicles added yet.</p>
+
+        <p className="text-sm text-(--text-muted) max-w-xs">Add your first vehicle and make it available for booking.</p>
+
+        {/* Button */}
+        <Link
+          to="/all-vehicles"
+          className="mt-2 text-sm px-4 py-2 rounded-full bg-(--accent) text-white 
+               shadow-[0_6px_20px_rgba(34,211,238,0.35)] 
+               hover:bg-(--accent-cyan) transition-all duration-500 active:scale-95"
+        >
+          Add Vehicle
+        </Link>
+      </div>
+    );
   }
 
   const handleDeleteBtn = (vehicleId) => {
@@ -51,6 +80,10 @@ const MyVehicles = () => {
     });
   };
 
+  const handleViewDetails = (vehicleId) => {
+    navigate(`/vehicle-details/${vehicleId}`);
+  };
+
   return (
     <section className="my-16 px-3 lg:px-0">
       <Container>
@@ -76,12 +109,6 @@ const MyVehicles = () => {
           <p className="hidden md:block">
             You've added <span className="font-semibold text-(--text-primary)">{myVehicles.length}</span> vehicles
           </p>
-          <div className="flex items-center justify-end gap-2">
-            <span>Sort by:</span>
-            <button className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-(--text-primary)">
-              Newest <span>▾</span>
-            </button>
-          </div>
         </div>
 
         {/* Desktop table */}
@@ -119,7 +146,10 @@ const MyVehicles = () => {
                           {vehicle.vehicleName} <span className="font-normal text-(--text-muted)">{vehicle.vehicleModel}</span>
                         </p>
                         <p className="text-[11px] text-(--text-muted)">Location: {vehicle.location}</p>
-                        <button className="text-[11px] font-medium text-(--accent) hover:text-(--accent-cyan) cursor-pointer">
+                        <button
+                          onClick={() => handleViewDetails(vehicle._id)}
+                          className="text-[11px] font-medium text-(--accent) hover:text-(--accent-cyan) cursor-pointer"
+                        >
                           View details
                         </button>
                       </div>

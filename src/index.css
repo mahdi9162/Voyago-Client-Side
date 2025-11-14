@@ -57,7 +57,7 @@ h6 {
 .navlink-style {
   @apply relative px-4 py-2 text-sm font-medium transition-all duration-500
          top-0 left-0 right-0 z-50 w-full
-         bg-black/10 backdrop-blur-sm rounded-2xl shadow-2xl;
+         bg-black/10 backdrop-blur-sm rounded-2xl shadow-2xl mb-3;
   color: var(--text-muted);
 }
 
@@ -88,7 +88,7 @@ h6 {
 /* nav signout style */
 .signout-btn-style {
   @apply px-5 py-2 text-sm font-semibold rounded-lg bg-(--accent-cyan) text-white hover:bg-(--accent) hover:shadow-[0_0_12px_rgba(14,165,233,0.5)] 
-  transition-all duration-300;
+  transition-all duration-300 ;
 }
 
 /* Hero  */

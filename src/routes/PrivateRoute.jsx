@@ -1,12 +1,17 @@
 import React, { use } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import { Navigate } from 'react-router';
+import Spinner from '../utils/Spinner';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = use(AuthContext);
 
   if (loading) {
-    return <div className="text-center py-20 text-xl text-primary">Checking authentication...</div>;
+    return (
+      <div className='mt-20'>
+        <Spinner></Spinner>;
+      </div>
+    );
   }
 
   if (!user) {

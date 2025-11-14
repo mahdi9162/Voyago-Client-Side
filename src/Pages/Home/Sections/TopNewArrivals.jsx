@@ -4,6 +4,7 @@ import Container from '../../../components/container/Container';
 import VehicleCard from './VehicleCard';
 import { Link } from 'react-router';
 import { ThemeContext } from '../../../context/ThemeProvider';
+import Spinner from '../../../utils/Spinner';
 
 const TopNewArrivals = () => {
   const { theme } = use(ThemeContext);
@@ -11,7 +12,11 @@ const TopNewArrivals = () => {
   const latestVehicles = vehicles.data;
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="mt-20">
+        <Spinner></Spinner>
+      </div>
+    );
   }
 
   if (error) {

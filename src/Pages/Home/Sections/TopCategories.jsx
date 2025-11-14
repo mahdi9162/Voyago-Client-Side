@@ -36,10 +36,10 @@ const TopCategories = () => {
 
   return (
     <>
-      <section className="my-16 md:my-30 px-3 lg:px-0">
+      <section className="my-16 md:my-30 px-3 lg:px-0 ">
         <Container>
           {/* Header */}
-          <div className="flex items-center flex-col md:flex-row text-center md:text-left  md:justify-between gap-4 mb-8">
+          <div className="flex items-center flex-col md:flex-row text-center md:text-left  md:justify-between gap-4 mb-8 ">
             <div>
               <h2 className="text-2xl md:text-3xl font-semibold text-(--text-primary)">Top Categories</h2>
               <p className="mt-1 text-sm text-(--text-muted)">Find the perfect ride by type</p>
@@ -62,8 +62,7 @@ const TopCategories = () => {
             {categories.map(({ id, title, subtitle, Icon }) => (
               <div
                 key={id}
-                className="group rounded-3xl border border-white/10 bg-white/5 dark:bg-white/5
-                 shadow-[0_18px_45px_rgba(0,0,0,0.55)] backdrop-blur-xl px-5 py-7 md:px-6 md:py-8 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.75)]
+                className="group rounded-3xl border border-white/10 bg-(--bg-secondary)/70 dark:bg-white/5 shadow-lg backdrop-blur-xl px-5 py-7 md:px-6 md:py-8 flex flex-col items-center text-center transition-all duration-700 hover:-translate-y-1.5 hover:shadow-2xl
                 "
               >
                 {/* Icon wrapper */}

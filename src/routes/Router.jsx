@@ -7,11 +7,11 @@ import AllVehicles from '../Pages/Vehicles/AllVehicles';
 import AddVehicle from '../Pages/Vehicles/AddVehicle';
 import MyVehicles from '../Pages/Vehicles/MyVehicles';
 import MyBookings from '../Pages/Bookings/MyBookings';
-import NotFound from '../Pages/Error/NotFound';
 import Signup from '../Pages/Auth/Signup';
 import VehicleDetails from '../Pages/Vehicles/VehicleDetails';
 import PrivateRoute from './PrivateRoute';
 import UpdateVehicle from '../Pages/Vehicles/UpdateVehicle';
+import NotFound from '../Pages/Error/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -60,7 +60,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/vehicle-details/:id',
-        Component: VehicleDetails,
+        element: (
+          <PrivateRoute>
+            <VehicleDetails></VehicleDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: '/update-vehicle/:id',

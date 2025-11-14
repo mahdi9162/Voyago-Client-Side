@@ -55,7 +55,7 @@ const FeaturedOwner = () => {
                   flex items-center gap-2
                   px-4 py-1.5
                   rounded-full
-                  bg-(--accent-cyan)
+                  bg-(--accent-cyan)/70
                   text-xs font-semibold text-black
                   shadow-[0_10px_25px_rgba(0,255,255,0.45)]
                 "
@@ -155,7 +155,7 @@ const FeaturedOwner = () => {
                   inline-flex items-center justify-center
                   px-5 md:px-6 py-2
                   rounded-full
-                  bg-(--accent-cyan)
+                  bg-(--accent-cyan)/70
                   text-[13px] md:text-sm font-semibold text-black
                   shadow-[0_14px_35px_rgba(0,255,255,0.4)]
                   transition-all duration-500

@@ -1,10 +1,18 @@
 import React, { use } from 'react';
 import { ThemeContext } from '../../../context/ThemeProvider';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import carImg from '../../../assets/images/carimg.jpg';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const VehicleCard = ({ vehicle }) => {
   const { theme } = use(ThemeContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { user, loading } = use(AuthContext);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   const { _id, vehicleName, vehicleModel, pricePerDay, fuelType, transmission, seats, coverImage } = vehicle || {};
 
@@ -89,7 +97,7 @@ const VehicleCard = ({ vehicle }) => {
         </div>
 
         {/* Right button */}
-        <Link to={`/vehicle-details/${_id}`} type="button" className={theme === 'dark' ? 'dark-view' : 'light-view'}>
+        <Link to={user ? `/vehicle-details/${_id}` : `/login`} type="button" className={theme === 'dark' ? 'dark-view' : 'light-view'}>
           View details
         </Link>
       </div>

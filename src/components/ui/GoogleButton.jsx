@@ -3,7 +3,7 @@ import React from 'react';
 const GoogleButton = ({ onClick }) => {
   return (
     <>
-      <button onClick={onClick} className="btn w-full rounded-full bg-white text-black border-[#e5e5e5]">
+      <button onClick={onClick} className="btn w-full rounded-full bg-white text-black border-[#e5e5e5] hover:scale-[1.02] transition duration-500">
         <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <g>
             <path d="m0 0H512V512H0" fill="#fff"></path>

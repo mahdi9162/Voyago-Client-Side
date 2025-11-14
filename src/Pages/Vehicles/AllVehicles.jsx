@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Container from '../../components/container/Container';
 import useVehicles from '../../hooks/useVehicles';
 import VehicleCard from '../Home/Sections/VehicleCard';
+import Spinner from '../../utils/Spinner';
 
 // Categories
 const categoryOptions = ['All', 'SUV', 'Sedan', 'Electric', 'Van'];
@@ -20,7 +21,11 @@ const AllVehicles = () => {
   const allVehicles = vehicles.data;
 
   if (loading) {
-    return <p className="text-center py-20">Loading vehicles...</p>;
+    return (
+      <div className="mt-20">
+        <Spinner></Spinner>
+      </div>
+    );
   }
   if (error) {
     return <p className="text-center text-red-500 py-20">{error}</p>;

@@ -6,6 +6,7 @@ import Container from '../../../components/container/Container';
 import Button from '../../../components/ui/ButtonLight';
 import ButtonLight from '../../../components/ui/ButtonLight';
 import ButtonDark from '../../../components/ui/ButtonDark';
+import { Link } from 'react-router';
 
 const HeroSec = () => {
   const { theme } = use(ThemeContext);
@@ -27,7 +28,9 @@ const HeroSec = () => {
               <p className="mt-3 mb-5 text-xs md:text-lg opacity-90 hero-text">
                 Discover premium car rentals built for comfort, adventure,<span className="block"> and unforgettable journeys.</span>
               </p>
-              <div>{theme === 'dark' ? <ButtonDark>All Vehicles</ButtonDark> : <ButtonLight>All Vehicles</ButtonLight>}</div>
+              <Link to="/all-vehicles">
+                {theme === 'dark' ? <ButtonDark>All Vehicles</ButtonDark> : <ButtonLight>All Vehicles</ButtonLight>}
+              </Link>
             </div>
           </Container>
         </div>

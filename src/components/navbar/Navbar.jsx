@@ -8,10 +8,14 @@ import ThemeToggle from '../ui/ThemeToggle';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
 import { notifyError, notifySuccess } from '../../utils/toastService';
+import avaterImg from '../../assets/images/avater.png';
+import Spinner from '../../utils/Spinner';
 
 const Navbar = () => {
   const { theme } = use(ThemeContext);
-  const { UserSignOut, user } = use(AuthContext);
+  const { UserSignOut, user, loading } = use(AuthContext);
+  console.log(user);
+
   const links = (
     <>
       <li>
@@ -77,7 +81,7 @@ const Navbar = () => {
                 </div>
                 <ul tabIndex="-1" className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                   {links}
-                  <li>
+                  <li className="mx-auto mt-2">
                     <ThemeToggle />
                   </li>
                 </ul>
@@ -111,30 +115,54 @@ const Navbar = () => {
               <ul className="menu menu-horizontal gap-4 px-1">{links}</ul>
             </div>
             <div className="navbar-end gap-4">
-              {user ? (
-                <Link
-                  onClick={handleUserSignout}
-                  className="px-5 py-2 text-sm font-medium rounded-lg border 
-                     border-(--accent-cyan) text-(--accent-cyan) 
-                     hover:bg-(--accent-cyan) hover:text-white 
-                     transition-all duration-300 shadow-sm "
-                >
-                  Logout
-                </Link>
+              {loading ? (
+                <div className="flex items-center gap-4">
+                  <div className="h-10 w-24 rounded-lg bg-white/10 animate-pulse"></div>
+                  <div className="h-10 w-10 rounded-full bg-white/10 animate-pulse"></div>
+                </div>
+              ) : user ? (
+                // login (Show Logout and Avatar)
+                <>
+                  <button
+                    onClick={handleUserSignout}
+                    className="px-5 py-2 text-sm font-medium rounded-lg border 
+                 border-(--accent-cyan) text-(--accent-cyan) 
+                 hover:bg-(--accent-cyan) hover:text-white 
+                 transition-all duration-300 shadow-sm"
+                  >
+                    Logout
+                  </button>
+
+                  {/* User Avatar with Tooltip */}
+                  <Link to="/" className="inline">
+                    <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
+                      <div className="avatar avatar-online">
+                        <div className="w-10 rounded-full">
+                          <img src={user?.photoURL ? user?.photoURL : avaterImg} alt={user?.displayName || 'User Avatar'} />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </>
               ) : (
-                <Link
-                  to="/login"
-                  className="px-5 py-2 text-sm font-medium rounded-lg border 
-                     border-(--accent-cyan) text-(--accent-cyan) 
-                     hover:bg-(--accent-cyan) hover:text-white 
-                     transition-all duration-300 shadow-sm "
-                >
-                  Login
-                </Link>
+                //  logout (Show Login and Signup)
+                <>
+                  <Link
+                    to="/login"
+                    className="px-5 py-2 text-sm font-medium rounded-lg border border-(--accent-cyan) text-(--accent-cyan) hover:bg-(--accent-cyan) hover:text-white transition-all duration-300 shadow-sm"
+                  >
+                    Login
+                  </Link>
+
+                  <Link
+                    to="/signup"
+                    className="px-5 py-2 text-sm font-semibold rounded-lg bg-(--accent) text-white 
+                 hover:bg-(--accent-cyan) hover:text-black transition-all duration-300 shadow-sm"
+                  >
+                    Signup
+                  </Link>
+                </>
               )}
-              <Link to="/signup" className={user ? 'hidden' : 'signout-btn-style'}>
-                Signup
-              </Link>
               <div className="hidden lg:flex">
                 <ThemeToggle />
               </div>

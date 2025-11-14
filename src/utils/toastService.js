@@ -10,23 +10,25 @@ const baseToast = {
   theme: 'dark',
   style: {
     fontWeight: 500,
-    backdropFilter: 'blur(6px)',
+    backdropFilter: 'blur(10px)',
     borderRadius: '12px',
+    maxWidth: '420px',
+    marginTop: '8px',
   },
 };
 
 const successColors = {
-  bgColor: 'rgba(0, 255, 170, 0.08)',
-  borderColor: '#00ffaa40',
-  textColor: '#00ffae',
-  progressBarColor: '#00ffaa',
+  bgColor: 'rgba(15, 23, 42, 0.96)',
+  borderColor: 'rgba(74, 222, 128, 0.5)',
+  textColor: '#dcfce7',
+  progressBarColor: '#22c55e',
 };
 
 const errorColors = {
-  bgColor: 'rgba(255, 0, 70, 0.08)',
-  borderColor: '#ff4a4a40',
-  textColor: '#ff4a4a',
-  progressBarColor: '#ff4a4a',
+  bgColor: 'rgba(15, 23, 42, 0.96)',
+  borderColor: 'rgba(248, 113, 113, 0.55)',
+  textColor: '#fee2e2',
+  progressBarColor: '#f97373',
 };
 
 export const notifySuccess = (message) => {
@@ -52,8 +54,6 @@ export const notifyError = (message) => {
       border: `1px solid ${errorColors.borderColor}`,
       color: errorColors.textColor,
     },
-    progressStyle: {
-      background: errorColors.progressBarColor,
-    },
+    progressStyle: { background: errorColors.progressBarColor },
   });
 };
