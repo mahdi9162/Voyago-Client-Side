@@ -5,6 +5,7 @@ import useMyVehicles from '../../hooks/useMyVehicles';
 import carImg from '../../assets/images/carimg.jpg';
 import { format } from 'date-fns';
 import { AuthContext } from '../../context/AuthProvider';
+import { Link } from 'react-router';
 
 const MyVehicles = () => {
   const { myVehicles, loading } = useMyVehicles();
@@ -118,9 +119,12 @@ const MyVehicles = () => {
 
                     {/* Actions */}
                     <div className="flex items-center justify-end gap-2">
-                      <button className="inline-flex items-center justify-center rounded-full border border-(--accent)/60 bg-(--accent)/10 px-3 py-1.5 text-xs font-semibold text-(--accent) hover:bg-(--accent-cyan) hover:border-transparent hover:text-slate-900 transition-all duration-500 cursor-pointer">
+                      <Link
+                        to={`/update-vehicle/${vehicle._id}`}
+                        className="inline-flex items-center justify-center rounded-full border border-(--accent)/60 bg-(--accent)/10 px-3 py-1.5 text-xs font-semibold text-(--accent) hover:bg-(--accent-cyan) hover:border-transparent hover:text-slate-900 transition-all duration-500 cursor-pointer"
+                      >
                         Update
-                      </button>
+                      </Link>
                       <button className="inline-flex items-center justify-center rounded-full border border-rose-500/60 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500 hover:text-white transition-all duration-500 cursor-pointer">
                         Delete
                       </button>
@@ -175,9 +179,12 @@ const MyVehicles = () => {
                 <div className="flex items-center justify-between gap-2">
                   <button className="text-xs font-medium text-(--accent) hover:text-(--accent-cyan)">View details</button>
                   <div className="flex gap-2">
-                    <button className="inline-flex items-center justify-center rounded-full border border-(--accent)/60 bg-(--accent)/10 px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-(--accent) hover:text-slate-900 transition-all duration-150">
+                    <Link
+                      to={`/update-vehicle/${vehicle._id}`}
+                      className="inline-flex items-center justify-center rounded-full border border-(--accent)/60 bg-(--accent)/10 px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-(--accent) hover:text-slate-900 transition-all duration-150"
+                    >
                       Update
-                    </button>
+                    </Link>
                     <button className="inline-flex items-center justify-center rounded-full border border-rose-500/60 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500 hover:text-white transition-all duration-150">
                       Delete
                     </button>

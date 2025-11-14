@@ -3,7 +3,7 @@ import Container from '../../components/container/Container';
 import { AuthContext } from '../../context/AuthProvider';
 import axios from 'axios';
 import { notifyError, notifySuccess } from '../../utils/toastService';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import previewCarImg from '../../assets/images/previewCar.jpg';
 
 const AddVehicle = () => {
@@ -123,6 +123,7 @@ const AddVehicle = () => {
                           placeholder="e.g. Toyota"
                           type="text"
                           name="name"
+                          required
                         />
                       </div>
 
@@ -133,6 +134,7 @@ const AddVehicle = () => {
                           placeholder="Corolla Altis"
                           type="text"
                           name="model"
+                          required
                         />
                       </div>
 
@@ -143,6 +145,7 @@ const AddVehicle = () => {
                           placeholder="SUV, Sedan, Electric..."
                           type="text"
                           name="category"
+                          required
                         />
                       </div>
 
@@ -153,6 +156,7 @@ const AddVehicle = () => {
                           placeholder="Los Angeles, CA"
                           type="text"
                           name="location"
+                          required
                         />
                       </div>
 
@@ -163,6 +167,7 @@ const AddVehicle = () => {
                           placeholder="Hybrid, Petrol, Electric..."
                           type="text"
                           name="fuelType"
+                          required
                         />
                       </div>
 
@@ -173,6 +178,7 @@ const AddVehicle = () => {
                           placeholder="Automatic / Manual"
                           type="text"
                           name="transmission"
+                          required
                         />
                       </div>
                     </div>
@@ -190,6 +196,7 @@ const AddVehicle = () => {
                             placeholder="120"
                             type="number"
                             name="price"
+                            required
                           />
                         </div>
 
@@ -200,6 +207,7 @@ const AddVehicle = () => {
                             placeholder="5"
                             type="number"
                             name="seat"
+                            required
                           />
                         </div>
                       </div>
@@ -211,6 +219,7 @@ const AddVehicle = () => {
                           placeholder="Available / Unavailable"
                           type="text"
                           name="availability"
+                          required
                         />
                       </div>
                     </div>
@@ -224,6 +233,7 @@ const AddVehicle = () => {
                           placeholder="https://..."
                           type="text"
                           name="photoURL"
+                          required
                         />
                       </div>
                     </div>
@@ -239,6 +249,7 @@ const AddVehicle = () => {
                         className="mt-3 w-full rounded-2xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-3 text-sm text-(--text-primary) placeholder:text-(--text-muted) resize-none focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
                         placeholder="E.g. Smooth hybrid sedan, perfect for city trips and weekend getaways."
                         name="description"
+                        required
                       />
                     </div>
                     {/* Key Features */}
@@ -250,6 +261,7 @@ const AddVehicle = () => {
                         className="mt-3 w-full rounded-2xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-3 text-sm text-(--text-primary) placeholder:text-(--text-muted) resize-none focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
                         placeholder="Premium audio, Sunroof, Wireless CarPlay"
                         name="features"
+                        required
                       />
                     </div>
                   </div>
@@ -292,9 +304,13 @@ const AddVehicle = () => {
               </div>
               {/* Buttons */}
               <div className="mt-8 flex items-center justify-end gap-4">
-                <button className="rounded-full border bg-(--accent-cyan)/20 px-6 py-2.5 text-sm font-medium text-(--text-muted) hover:bg-red-400 hover:text-white transition cursor-pointer">
+                <Link
+                  to="/"
+                  type="button"
+                  className="rounded-full border bg-(--accent-cyan)/20 px-6 py-2.5 text-sm font-medium text-(--text-muted) hover:bg-red-400 hover:text-white transition cursor-pointer"
+                >
                   Cancel
-                </button>
+                </Link>
                 <button className="rounded-full bg-(--accent) px-7 py-2.5 text-sm font-semibold text-white shadow-[0_18px_60px_rgba(34,211,238,0.7)] hover:bg-(--accent-cyan) transition active:scale-95 cursor-pointer">
                   Add Vehicle
                 </button>
