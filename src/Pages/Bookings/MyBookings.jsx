@@ -26,8 +26,8 @@ const MyBookings = () => {
           {bookings.map((booking) => {
             const { pickupLocation, tripStartDate, userEmail, userName, vehicleId, perDayCost, status, createdAt, _id } = booking;
 
-            const tripStartFormatted = format(new Date(tripStartDate), 'MMM dd, yyyy');
-            const bookedOnDate = format(new Date(createdAt), 'MMM dd, yyyy - h:mm a');
+            const tripStartFormatted = format(new Date(tripStartDate || new Date()), 'MMM dd, yyyy');
+            const bookedOnDate = format(new Date(createdAt || new Date()), 'MMM dd, yyyy - h:mm a');
             // Booking card
             return (
               <div
@@ -49,10 +49,9 @@ const MyBookings = () => {
                   {/* User Info */}
                   <div className="text-(--text-muted) text-sm">
                     <p>
-                      Requested by :
-                      <span className="font-medium text-xs md:text-base text-(--text-primary)"> {userName}</span>
+                      Requested by :<span className="font-medium text-xs md:text-base text-(--text-primary)"> {userName}</span>
                     </p>
-                    <p className='text-xs md:text-base mt-1'>{userEmail}</p>
+                    <p className="text-xs md:text-base mt-1">{userEmail}</p>
                   </div>
 
                   {/* Vehicle ID */}

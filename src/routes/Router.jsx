@@ -28,15 +28,27 @@ export const router = createBrowserRouter([
       },
       {
         path: '/add-vehicle',
-        Component: AddVehicle,
+        element: (
+          <PrivateRoute>
+            <AddVehicle></AddVehicle>
+          </PrivateRoute>
+        ),
       },
       {
         path: '/my-vehicles',
-        Component: MyVehicles,
+        element: (
+          <PrivateRoute>
+            <MyVehicles></MyVehicles>
+          </PrivateRoute>
+        ),
       },
       {
         path: '/my-bookings',
-        Component: MyBookings,
+        element: (
+          <PrivateRoute>
+            <MyBookings></MyBookings>
+          </PrivateRoute>
+        ),
       },
       {
         path: '/login',
@@ -48,11 +60,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/vehicle-details/:id',
-        element: (
-          <PrivateRoute>
-            <VehicleDetails></VehicleDetails>
-          </PrivateRoute>
-        ),
+        Component: VehicleDetails,
       },
       {
         path: '/update-vehicle/:id',

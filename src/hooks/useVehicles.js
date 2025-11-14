@@ -11,7 +11,6 @@ const useVehicles = (dataLink) => {
       try {
         const response = await axios.get(`${dataLink}`);
         setVehiclse(response);
-        // eslint-disable-next-line no-unused-vars
       } catch (err) {
         setError('Could not fetch vehicle data.');
       } finally {

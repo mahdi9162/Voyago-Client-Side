@@ -58,6 +58,10 @@ const VehicleDetails = () => {
 
   const handleReqRideButton = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      navigate('/login');
+    }
     const form = e.target;
     const location = form.location.value;
     const date = form.date.value;
@@ -82,7 +86,7 @@ const VehicleDetails = () => {
       await axios.post('http://localhost:3000/bookings', bookingData);
       notifySuccess('Ride request sent! Your host will respond shortly.💖');
       form.reset();
-      navigate('/my-bookings')
+      navigate('/my-bookings');
     } catch (error) {
       notifyError('Something went wrong.Please try again in a moment.😕');
       console.log(error);
@@ -216,9 +220,7 @@ const VehicleDetails = () => {
                 <div className="flex-1">
                   <p className="text-xs font-medium uppercase tracking-wide text-(--text-muted)">Host Info</p>
                   <p className="text-sm font-semibold text-(--text-primary)">{ownerName}</p>
-                  <p className="text-xs text-(--text-muted)">
-                    Trusted Voyago host • {`${rating.toFixed ? rating.toFixed(1) : rating} ★ rating`}
-                  </p>
+                  <p className="text-xs text-(--text-muted)">Trusted Voyago host • 4.5 ★ rating</p>
                   {userEmail && <p className="mt-1 text-[12px] text-(--text-muted)/90">Contact: {userEmail}</p>}
                 </div>
               </div>
@@ -241,6 +243,7 @@ const VehicleDetails = () => {
                         name="location"
                         placeholder="e.g. Los Angeles Downtown"
                         className="w-full rounded-xl border border-white/10 bg-(--bg-primary) px-3 py-2 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)"
+                        required
                       />
                     </div>
 
@@ -250,6 +253,7 @@ const VehicleDetails = () => {
                         type="date"
                         name="date"
                         className="w-full rounded-xl border border-white/10 bg-(--bg-primary) px-3 py-2 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)"
+                        required
                       />
                     </div>
                   </div>

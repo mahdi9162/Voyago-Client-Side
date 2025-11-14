@@ -1,4 +1,3 @@
-// src/Pages/Dashboard/MyVehicles.jsx
 import React, { use } from 'react';
 import Container from '../../components/container/Container';
 import useMyVehicles from '../../hooks/useMyVehicles';
@@ -6,6 +5,9 @@ import carImg from '../../assets/images/carimg.jpg';
 import { format } from 'date-fns';
 import { AuthContext } from '../../context/AuthProvider';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { notifyError } from '../../utils/toastService';
 
 const MyVehicles = () => {
   const { myVehicles, loading } = useMyVehicles();
@@ -18,7 +20,36 @@ const MyVehicles = () => {
   if (loading) {
     return <p className="text-center py-20">Checking bookings...</p>;
   }
-  console.log(myVehicles);
+
+  const handleDeleteBtn = (vehicleId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:3000/vehicles/${vehicleId}`)
+          .then((res) => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your vehicle has been deleted.',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            window.location.reload();
+          })
+          .catch((error) => {
+            notifyError('Failed to delete vehicle. Server error.');
+          });
+      }
+    });
+  };
 
   return (
     <section className="my-16 px-3 lg:px-0">
@@ -125,7 +156,10 @@ const MyVehicles = () => {
                       >
                         Update
                       </Link>
-                      <button className="inline-flex items-center justify-center rounded-full border border-rose-500/60 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500 hover:text-white transition-all duration-500 cursor-pointer">
+                      <button
+                        onClick={() => handleDeleteBtn(vehicle._id)}
+                        className="inline-flex items-center justify-center rounded-full border border-rose-500/60 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500 hover:text-white transition-all duration-500 cursor-pointer"
+                      >
                         Delete
                       </button>
                     </div>
@@ -185,7 +219,10 @@ const MyVehicles = () => {
                     >
                       Update
                     </Link>
-                    <button className="inline-flex items-center justify-center rounded-full border border-rose-500/60 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500 hover:text-white transition-all duration-150">
+                    <button
+                      onClick={() => handleDeleteBtn(vehicle._id)}
+                      className="inline-flex items-center justify-center rounded-full border border-rose-500/60 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500 hover:text-white transition-all duration-150"
+                    >
                       Delete
                     </button>
                   </div>

@@ -16,6 +16,7 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || '/';
+ 
   const loginImage = theme === 'dark' ? loginImgDark : loginImgLight;
 
   const handleEmailPassLogin = (e) => {
@@ -30,8 +31,8 @@ const Login = () => {
         const loginUser = res.user;
         setUser(loginUser);
         notifySuccess(`Logged in successfully! Welcome back ${loginUser?.displayName || 'there'} 🚀`);
-        navigate(from, { replace: true });
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         if (error.code === 'auth/invalid-credential') {
@@ -48,7 +49,7 @@ const Login = () => {
         const loginUser = res.user;
         setUser(loginUser);
         notifySuccess(`Logged in successfully! Welcome back ${loginUser?.displayName || 'there'} 🚀`);
-        navigate('/');
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         notifyError('⚠️ Login failed! Check your credentials.');
