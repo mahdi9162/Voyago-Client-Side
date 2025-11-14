@@ -14,7 +14,7 @@ const VehicleDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { vehicles, loading } = useVehicles('http://localhost:3000/vehicles');
+  const { vehicles, loading } = useVehicles('https://voyago-server-side.vercel.app/vehicles');
   const allVehicles = vehicles?.data || [];
 
   if (loading) {
@@ -82,13 +82,12 @@ const VehicleDetails = () => {
     };
 
     try {
-      await axios.post('http://localhost:3000/bookings', bookingData);
+      await axios.post('https://voyago-server-side.vercel.app/bookings', bookingData);
       notifySuccess('Ride request sent! Your host will respond shortly.💖');
       form.reset();
       navigate('/my-bookings');
     } catch (error) {
       notifyError('Something went wrong.Please try again in a moment.😕');
-      console.log(error);
     }
   };
 

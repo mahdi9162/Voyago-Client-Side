@@ -22,12 +22,11 @@ const useBookings = () => {
           setLoading(false);
           return;
         }
-        const url = `http://localhost:3000/bookings?email=${email}`;
+        const url = `https://voyago-server-side.vercel.app/bookings?email=${email}`;
 
         const response = await axios.get(url);
         setBookings(response.data);
       } catch (error) {
-        console.log(error);
       } finally {
         setLoading(false);
       }

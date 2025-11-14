@@ -27,7 +27,6 @@ const Signup = () => {
     const password = form.password.value;
     const photoURL = form.photo.value;
 
-    console.log(name, photoURL);
 
     // Password Validation
     const validationMsg = validatePassword(password);

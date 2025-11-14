@@ -22,12 +22,11 @@ const useMyVehicles = () => {
           setLoading(false);
           return;
         }
-        const url = `http://localhost:3000/my-vehicles?email=${email}`;
+        const url = `https://voyago-server-side.vercel.app/my-vehicles?email=${email}`;
 
         const response = await axios.get(url);
         setMyVehicles(response.data);
       } catch (error) {
-        console.log(error);
       } finally {
         setLoading(false);
       }

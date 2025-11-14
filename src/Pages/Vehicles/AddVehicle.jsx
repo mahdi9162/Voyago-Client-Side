@@ -62,14 +62,13 @@ const AddVehicle = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:3000/vehicles', vehicleData);
+      const response = await axios.post('https://voyago-server-side.vercel.app/vehicles', vehicleData);
       setLoading(true);
       notifySuccess('Your vehicle is now live on Voyago! 🎉');
       form.reset();
       navigate('/my-vehicles');
     } catch (error) {
       notifyError('Couldn’t add the vehicle. Please try again.');
-      console.log(error);
     } finally {
       setLoading(false);
     }

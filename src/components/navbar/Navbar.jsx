@@ -14,7 +14,6 @@ import Spinner from '../../utils/Spinner';
 const Navbar = () => {
   const { theme } = use(ThemeContext);
   const { UserSignOut, user, loading } = use(AuthContext);
-  console.log(user);
 
   const links = (
     <>
@@ -64,7 +63,6 @@ const Navbar = () => {
       })
       .catch((error) => {
         notifyError('⚠️ Logout failed! Please try again.');
-        console.log(error);
       });
   };
   return (

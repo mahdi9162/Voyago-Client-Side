@@ -53,7 +53,6 @@ const Login = () => {
       })
       .catch((error) => {
         notifyError('⚠️ Login failed! Check your credentials.');
-        console.log(error);
       })
       .finally(() => setLoading(false));
   };

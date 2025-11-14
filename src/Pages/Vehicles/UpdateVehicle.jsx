@@ -18,10 +18,9 @@ const AddVehicle = () => {
     const fetchVehicleData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:3000/vehicles/${id}`);
+        const response = await axios.get(`https://voyago-server-side.vercel.app/vehicles/${id}`);
         setVehicleData(response.data);
       } catch (error) {
-        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -80,14 +79,13 @@ const AddVehicle = () => {
     };
 
     try {
-      const response = await axios.put(`http://localhost:3000/vehicles/${id}`, dataWillUpdate);
+      const response = await axios.put(`https://voyago-server-side.vercel.app/vehicles/${id}`, dataWillUpdate);
       setLoading(true);
       notifySuccess('Your vehicle is successfully updated! 🎉');
       form.reset();
       navigate('/my-vehicles');
     } catch (error) {
       notifyError('Couldn’t update the vehicle. Please try again.');
-      console.log(error);
     } finally {
       setLoading(false);
     }

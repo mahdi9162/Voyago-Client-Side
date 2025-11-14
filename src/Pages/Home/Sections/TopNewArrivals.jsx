@@ -8,7 +8,7 @@ import Spinner from '../../../utils/Spinner';
 
 const TopNewArrivals = () => {
   const { theme } = use(ThemeContext);
-  const { vehicles, loading, error } = useVehicles('http://localhost:3000/latest-vehicles/');
+  const { vehicles, loading, error } = useVehicles('https://voyago-server-side.vercel.app/latest-vehicles/');
   const latestVehicles = vehicles.data;
 
   if (loading) {

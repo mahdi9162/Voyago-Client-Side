@@ -17,7 +17,7 @@ const AllVehicles = () => {
   const [selectedLocation, setSelectedLocation] = useState('All cities');
   const [sortByPrice, setSortByPrice] = useState(SORT.LOW_TO_HIGH);
 
-  const { vehicles, loading, error } = useVehicles('http://localhost:3000/vehicles');
+  const { vehicles, loading, error } = useVehicles('https://voyago-server-side.vercel.app/vehicles');
   const allVehicles = vehicles.data;
 
   if (loading) {

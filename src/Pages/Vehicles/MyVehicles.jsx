@@ -62,7 +62,7 @@ const MyVehicles = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/vehicles/${vehicleId}`)
+          .delete(`https://voyago-server-side.vercel.app/vehicles/${vehicleId}`)
           .then((res) => {
             Swal.fire({
               title: 'Deleted!',

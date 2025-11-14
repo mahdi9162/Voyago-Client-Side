@@ -9,7 +9,6 @@ import {
 import { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase/firebase.config';
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 const provider = new GoogleAuthProvider();
 

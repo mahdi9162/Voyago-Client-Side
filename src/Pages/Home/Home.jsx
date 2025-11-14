@@ -3,7 +3,7 @@ import HeroSec from './Sections/HeroSec';
 import TopCategories from './Sections/TopCategories';
 import FeaturedOwner from './Sections/FeaturedOwner';
 import TopNewArrivals from './Sections/TopNewArrivals';
-import AboutVoyago from '../Vehicles/AboutVoyago';
+import AboutVoyago from '../Home/Sections/AboutVoyago';
 
 const Home = () => {
   return (
