@@ -17,23 +17,31 @@ const FeaturedOwner = () => {
   };
 
   return (
-    <section className="my-30 px-3 lg:px-0">
+    <section className="my-10 lg:my-20 px-3 lg:px-0">
       <Container>
         {/* Header */}
         <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold text-(--text-primary)">Trusted Voyago Owner</h2>
-          <p className="mt-1 text-sm md:text-base text-(--text-muted)">Meet a real host you can count on.</p>
+          <h2 data-aos="fade-right" className="text-2xl md:text-3xl font-semibold text-(--text-primary)">
+            Trusted Voyago Owner
+          </h2>
+          <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-sm md:text-base text-(--text-muted)">
+            Meet a real host you can count on.
+          </p>
         </div>
 
         {/* Spotlight Card */}
         <div
+          data-aos="fade-up"
+          data-aos-delay="140"
           className={`flex flex-col md:flex-row gap-6 md:gap-8
             rounded-3xl border bg-(--bg-secondary)/70
             backdrop-blur-xl px-5 py-6 md:px-8 md:py-8 ${theme === 'dark' ? 'darkGlow' : 'lightGlow'}`}
         >
           {/* Left: Avatar + badge */}
-          <div className="flex flex-col items-center gap-4 md:gap-5 md:w-1/3">
+          <div className="flex flex-col items-center gap-4 md:gap-5 md:w-1/2">
             <div
+              data-aos="zoom-in"
+              data-aos-delay="200"
               className="
                 relative
                 w-28 h-28 md:w-32 md:h-32

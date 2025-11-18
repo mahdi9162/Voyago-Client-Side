@@ -36,13 +36,17 @@ const TopCategories = () => {
 
   return (
     <>
-      <section className="my-16 md:my-30 px-3 lg:px-0 ">
+      <section className="my-10 lg:my-20 px-3 lg:px-0 ">
         <Container>
           {/* Header */}
           <div className="flex items-center flex-col md:flex-row text-center md:text-left  md:justify-between gap-4 mb-8 ">
             <div>
-              <h2 className="text-2xl md:text-3xl font-semibold text-(--text-primary)">Top Categories</h2>
-              <p className="mt-1 text-sm text-(--text-muted)">Find the perfect ride by type</p>
+              <h2 data-aos="fade-right" className="text-2xl md:text-3xl font-semibold text-(--text-primary)">
+                Top Categories
+              </h2>
+              <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-sm text-(--text-muted)">
+                Find the perfect ride by type
+              </p>
             </div>
 
             <div>
@@ -59,26 +63,27 @@ const TopCategories = () => {
               grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
             "
           >
-            {categories.map(({ id, title, subtitle, Icon }) => (
-              <div
-                key={id}
-                className="group rounded-3xl border border-white/10 bg-(--bg-secondary)/70 dark:bg-white/5 shadow-lg backdrop-blur-xl px-5 py-7 md:px-6 md:py-8 flex flex-col items-center text-center transition-all duration-700 hover:-translate-y-1.5 hover:shadow-2xl
+            {categories.map(({ id, title, subtitle, Icon }, index) => (
+              <div key={id} data-aos="fade-up" data-aos-delay={index * 80}>
+                <div
+                  key={id}
+                  className="group rounded-3xl border border-white/10 bg-(--bg-secondary)/70 dark:bg-white/5 shadow-lg backdrop-blur-xl px-5 py-7 md:px-6 md:py-8 flex flex-col items-center text-center transition-all duration-700 hover:-translate-y-1.5 hover:shadow-2xl
                 "
-              >
-                {/* Icon wrapper */}
-                <div className="mb-5 md:mb-6">
-                  <div
-                    className=" relative w-16 h-16 md:w-18 md:h-18 rounded-full bg-(--accent)/15
+                >
+                  {/* Icon wrapper */}
+                  <div className="mb-5 md:mb-6">
+                    <div
+                      className=" relative w-16 h-16 md:w-18 md:h-18 rounded-full bg-(--accent)/15
                       flex items-center justify-center border border-(--accent)/40
                       shadow-[0_0_0_1px_rgba(255,255,255,0.2)] group-hover:bg-(--accent) transition-all duration-500
                     "
-                  >
-                    <Icon className="text-xl md:text-2xl text-(--accent) group-hover:text-white transition-colors duration-500" />
+                    >
+                      <Icon className="text-xl md:text-2xl text-(--accent) group-hover:text-white transition-colors duration-500" />
 
-                    {/* Electric special glow */}
-                    {title === 'Electric' && (
-                      <span
-                        className="
+                      {/* Electric special glow */}
+                      {title === 'Electric' && (
+                        <span
+                          className="
                           absolute -inset-1.5
                           rounded-full
                           opacity-0 group-hover:opacity-100
@@ -86,14 +91,15 @@ const TopCategories = () => {
                           blur-sm
                           transition-opacity duration-500
                         "
-                      />
-                    )}
+                        />
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                {/* Texts */}
-                <h3 className="text-sm md:text-base font-semibold text-(--text-primary)">{title}</h3>
-                <p className="mt-1 text-[11px] md:text-xs text-(--text-muted)">{subtitle}</p>
+                  {/* Texts */}
+                  <h3 className="text-sm md:text-base font-semibold text-(--text-primary)">{title}</h3>
+                  <p className="mt-1 text-[11px] md:text-xs text-(--text-muted)">{subtitle}</p>
+                </div>
               </div>
             ))}
           </div>

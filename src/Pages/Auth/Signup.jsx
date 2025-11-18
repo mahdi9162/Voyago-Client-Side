@@ -1,32 +1,61 @@
 import React, { use, useState } from 'react';
 import Container from '../../components/container/Container';
-import signupLight from '../../assets/images/signupLight.jpg';
-import signupDark from '../../assets/images/signupDark.jpg';
+import signupLight from '../../assets/images/signupLight.webp';
+import signupDark from '../../assets/images/signupDark.webp';
 import { Link, useNavigate } from 'react-router';
 import LoginButton from '../../components/ui/LoginButton';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
 import { validatePassword } from '../../utils/validation';
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import GoogleButton from '../../components/ui/GoogleButton';
 import { notifyError, notifySuccess } from '../../utils/toastService';
+import logoImgLight from '../../assets/images/logo2.webp';
+import logoImgDark from '../../assets/images/logo.webp';
+
+// Motion start
+const formParentVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.12,
+      when: 'beforeChildren',
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+const formChildVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const imageVariants = {
+  hidden: { opacity: 0, x: 30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+// Motion end
 
 const Signup = () => {
   const { theme } = use(ThemeContext);
   const { setUser, setLoading, userSignup, userLoginWithGoogle } = use(AuthContext);
   const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
-  const loginImage = theme === 'dark' ? signupDark : signupLight;
+  const signupImage = theme === 'dark' ? signupDark : signupLight;
 
   const handleSignupWithEmailPass = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
+
     const email = form.email.value;
     const password = form.password.value;
-    const photoURL = form.photo.value;
-
 
     // Password Validation
     const validationMsg = validatePassword(password);
@@ -49,6 +78,7 @@ const Signup = () => {
       })
       .finally(() => setLoading(false));
   };
+
   // user Google Login
   const handleGoogleLogin = () => {
     userLoginWithGoogle()
@@ -68,13 +98,23 @@ const Signup = () => {
     <>
       <Container>
         <section className="bg-(--bg-primary) rounded-4xl">
-          <div className="flex lg:items-center justify-between my-20 flex-col lg:flex-row ">
-            {/* Login Form Start */}
-            <div className="lg:w-[35%] px-6 md:px-10">
-              <h3 className="text-xl md:text-3xl font-semibold text-(--text-primary)">Sign up for Voyago !</h3>
-              <p className="mt-3 text-xs md:text-base text-(--text-muted)">Start your effortless journey today.</p>
+          <div className="flex lg:items-center justify-between mt-10 lg:my-20 flex-col lg:flex-row ">
+            {/* Logo for mobile */}
+            <figure className="flex justify-center my-4 lg:hidden">
+              <img src={theme === 'dark' ? logoImgDark : logoImgLight} className="w-20" alt="" />
+            </figure>
 
-              <form onSubmit={handleSignupWithEmailPass} className="mt-4">
+            {/* Motion start - left form side */}
+            <motion.div className="lg:w-[35%] px-6 md:px-10 mb-8 lg:mb-0" variants={formParentVariants} initial="hidden" animate="visible">
+              <motion.h3 variants={formChildVariants} className="text-xl md:text-3xl font-semibold text-(--text-primary)">
+                Sign up for Voyago !
+              </motion.h3>
+
+              <motion.p variants={formChildVariants} className="mt-3 text-xs md:text-base text-(--text-muted)">
+                Start your effortless journey today.
+              </motion.p>
+
+              <motion.form variants={formChildVariants} onSubmit={handleSignupWithEmailPass} className="mt-4">
                 <div className="rounded-2xl border border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-md p-6 md:p-8">
                   <div className="space-y-4">
                     {/* Name */}
@@ -86,14 +126,15 @@ const Signup = () => {
                         name="name"
                         placeholder="Name"
                         className="
-                  input mt-2 w-full rounded-xl
-                  bg-(--bg-primary) text-(--text-primary)
-                  placeholder:text-(--text-muted)
-                  border border-white/10
-                  focus:outline-none focus:ring-2 focus:ring-(--accent)
-                "
+                          input mt-2 w-full rounded-xl
+                          bg-(--bg-primary) text-(--text-primary)
+                          placeholder:text-(--text-muted)
+                          border border-white/10
+                          focus:outline-none focus:ring-2 focus:ring-(--accent)
+                        "
                       />
                     </div>
+
                     {/* Email */}
                     <div>
                       <label className="label block text-sm font-medium text-(--text-muted)">Email</label>
@@ -103,12 +144,12 @@ const Signup = () => {
                         name="email"
                         placeholder="Email"
                         className="
-                  input mt-2 w-full rounded-xl
-                  bg-(--bg-primary) text-(--text-primary)
-                  placeholder:text-(--text-muted)
-                  border border-white/10
-                  focus:outline-none focus:ring-2 focus:ring-(--accent)
-                "
+                          input mt-2 w-full rounded-xl
+                          bg-(--bg-primary) text-(--text-primary)
+                          placeholder:text-(--text-muted)
+                          border border-white/10
+                          focus:outline-none focus:ring-2 focus:ring-(--accent)
+                        "
                       />
                     </div>
 
@@ -121,12 +162,12 @@ const Signup = () => {
                         name="password"
                         placeholder="Password"
                         className="
-                  input mt-2 w-full rounded-xl
-                  bg-(--bg-primary) text-(--text-primary)
-                  placeholder:text-(--text-muted)
-                  border border-white/10
-                  focus:outline-none focus:ring-2 focus:ring-(--accent)
-                "
+                          input mt-2 w-full rounded-xl
+                          bg-(--bg-primary) text-(--text-primary)
+                          placeholder:text-(--text-muted)
+                          border border-white/10
+                          focus:outline-none focus:ring-2 focus:ring-(--accent)
+                        "
                       />
                       {passwordError && (
                         <motion.p
@@ -139,6 +180,7 @@ const Signup = () => {
                         </motion.p>
                       )}
                     </div>
+
                     {/* Photo URL */}
                     <div>
                       <label className="label block text-sm font-medium text-(--text-muted)">Photo URL</label>
@@ -148,12 +190,12 @@ const Signup = () => {
                         name="photo"
                         placeholder="Photo URL"
                         className="
-                  input mt-2 w-full rounded-xl
-                  bg-(--bg-primary) text-(--text-primary)
-                  placeholder:text-(--text-muted)
-                  border border-white/10
-                  focus:outline-none focus:ring-2 focus:ring-(--accent)
-                "
+                          input mt-2 w-full rounded-xl
+                          bg-(--bg-primary) text-(--text-primary)
+                          placeholder:text-(--text-muted)
+                          border border-white/10
+                          focus:outline-none focus:ring-2 focus:ring-(--accent)
+                        "
                       />
                     </div>
 
@@ -166,21 +208,38 @@ const Signup = () => {
                         </Link>
                       </p>
                     </div>
+
                     <div className="w-full ">
                       <LoginButton>Signup</LoginButton>
                     </div>
                   </div>
                 </div>
-              </form>
-              <div className="-mt-6 px-6 md:px-8 pb-8 rounded-b-2xl border-x border-b border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-md">
+              </motion.form>
+
+              <motion.div
+                variants={formChildVariants}
+                className="-mt-6 px-6 md:px-8 pb-8 rounded-b-2xl border-x border-b border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-md"
+              >
                 <p className="text-center mb-1 text-(--text-muted)">Or</p>
                 <GoogleButton onClick={handleGoogleLogin} />
-              </div>
-            </div>
-            {/* Login Form End */}
+              </motion.div>
+            </motion.div>
+            {/* Motion end - left */}
+
             <div className="w-[60%] relative h-[550px] lg:h-[700px] rounded-r-4xl overflow-hidden hidden lg:block">
               <div className="absolute inset-0 bg-black/10 "></div>
-              <img src={loginImage} className="flex-2 absolute inset-0 h-full w-full object-cover" alt="" />
+              {/* Motion start - right image */}
+              <motion.img
+                key={theme}
+                src={signupImage}
+                className="flex-2 absolute inset-0 h-full w-full object-cover"
+                alt=""
+                variants={imageVariants}
+                initial={{ opacity: 0, scale: 1.03 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              />
+              {/* Motion end - right image */}
             </div>
           </div>
         </section>

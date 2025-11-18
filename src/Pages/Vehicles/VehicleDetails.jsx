@@ -7,6 +7,45 @@ import { AuthContext } from '../../context/AuthProvider';
 import axios from 'axios';
 import { notifyError, notifySuccess } from '../../utils/toastService';
 import Spinner from '../../utils/Spinner';
+import { motion } from 'framer-motion';
+
+// Motion variants
+const cardParent = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.12,
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+const fadeUpChild = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const imageSlide = {
+  hidden: { opacity: 0, x: 30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+const bookingCardSlide = {
+  hidden: { opacity: 0, x: 24 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
 
 const VehicleDetails = () => {
   const { theme } = use(ThemeContext);
@@ -20,7 +59,7 @@ const VehicleDetails = () => {
   if (loading) {
     return (
       <div className="mt-20">
-        <Spinner></Spinner>;
+        <Spinner />
       </div>
     );
   }
@@ -60,25 +99,27 @@ const VehicleDetails = () => {
 
     if (!user) {
       navigate('/login');
+      return;
     }
+
     const form = e.target;
-    const location = form.location.value;
+    const pickupLocation = form.location.value;
     const date = form.date.value;
     const userName = user.displayName;
-    const userEmail = user.email;
+    const userEmailForBooking = user.email;
     const vehicleID = id;
     const perDayPrice = pricePerDay;
     const createdAt = new Date().toISOString();
 
     const bookingData = {
-      pickupLocation: location,
+      pickupLocation,
       tripStartDate: date,
-      userEmail: userEmail,
-      userName: userName,
+      userEmail: userEmailForBooking,
+      userName,
       vehicleId: vehicleID,
       perDayCost: perDayPrice,
       status: 'Requested',
-      createdAt: createdAt,
+      createdAt,
     };
 
     try {
@@ -87,6 +128,7 @@ const VehicleDetails = () => {
       form.reset();
       navigate('/my-bookings');
     } catch (error) {
+      console.error('BOOKING ERROR:', error);
       notifyError('Something went wrong.Please try again in a moment.😕');
     }
   };
@@ -94,15 +136,20 @@ const VehicleDetails = () => {
   return (
     <section className="py-6 md:py-16 lg:py-20">
       <Container>
-        {/* Outer card */}
-        <div className="rounded-3xl border border-white/5 bg-(--bg-secondary)/80 shadow-[0_24px_80px_rgba(0,0,0,0.55)] backdrop-blur-xl px-4 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10">
+        {/* Outer card with motion */}
+        <motion.div
+          variants={cardParent}
+          initial="hidden"
+          animate="visible"
+          className="rounded-3xl border border-white/5 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-xl px-4 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10"
+        >
+          {/* Top section: title + image */}
           <div className="flex flex-col-reverse md:flex-row items-center justify-between mb-10">
-            {/* Left Div */}
-            <div>
-              {/* Title + price + CTA */}
+            {/* Left Div (text) */}
+            <motion.div variants={fadeUpChild}>
               <div className="flex flex-col gap-4 mb-6 md:mb-4">
                 <div className="space-y-2 lg:space-y-4">
-                  <h1 className="text-xl md:text-3xl lg:text-5xl font-semibold text-(--text-primary) ">
+                  <h1 className="text-xl md:text-3xl lg:text-5xl font-semibold text-(--text-primary)">
                     {vehicleName} {vehicleModel && <span className="font-light">{vehicleModel}</span>}
                   </h1>
                   <p className="text-xs md:text-base text-(--text-muted)">
@@ -112,7 +159,8 @@ const VehicleDetails = () => {
                     {availability && <span> • {availability}</span>}
                   </p>
                 </div>
-                {/* Rating */}
+
+                {/* Rating + price */}
                 <div className="flex items-end md:items-center gap-4">
                   <div className="text-right">
                     {rating && (
@@ -127,8 +175,9 @@ const VehicleDetails = () => {
                   </div>
                 </div>
               </div>
+
               {/* Feature badges */}
-              <div className="flex flex-wrap gap-5">
+              <motion.div variants={fadeUpChild} className="flex flex-wrap gap-5">
                 {fuelType && (
                   <span
                     className={`rounded-full px-3 py-1 text-xs md:text-sm font-medium ${
@@ -165,34 +214,38 @@ const VehicleDetails = () => {
                     🚗 <span>{category}</span>
                   </span>
                 )}
-              </div>
-            </div>
-            {/* Right Div */}
-            <div>
-              {/* img */}
+              </motion.div>
+            </motion.div>
+
+            {/* Right Div (image) */}
+            <motion.div variants={imageSlide}>
               <div className="w-full mb-8">
                 <div className="overflow-hidden rounded-2xl bg-black/20">
-                  <img
+                  <motion.img
+                    key={coverImage}
                     src={coverImage}
                     alt={`${vehicleName} ${vehicleModel}`}
                     className="w-full h-80 object-contain rounded-2xl bg-black/10"
+                    initial={{ scale: 1.05, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                   />
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Bottom: two-column layout */}
           <div className="flex flex-col gap-8 lg:flex-row lg:gap-10">
             {/* Left column */}
-            <div className="flex-1 space-y-6">
+            <motion.div variants={fadeUpChild} className="flex-1 space-y-6">
               {/* About */}
               <div>
                 <h3 className="text-lg font-semibold text-(--text-primary)">About this vehicle</h3>
                 <p className="mt-2 text-xs md:text-base text-justify leading-relaxed text-(--text-muted)">{description}</p>
               </div>
 
-              {/* Features list*/}
+              {/* Features list */}
               {Array.isArray(features) && features.length > 0 && (
                 <div>
                   <h4 className="text-sm font-semibold text-(--text-primary) mb-2">Key features</h4>
@@ -208,7 +261,6 @@ const VehicleDetails = () => {
 
               {/* Host info mini card */}
               <div className="mt-4 rounded-2xl border border-white/10 bg-(--accent-cyan)/20 px-4 py-4 md:px-5 md:py-5 flex items-center gap-4">
-                {/* Static avatar / placeholder */}
                 <div className="h-14 w-14 rounded-full bg-linear-to-br from-(--accent) to-(--accent-cyan) p-0.5">
                   <div className="h-full w-full rounded-full bg-(--bg-secondary) flex items-center justify-center text-sm font-semibold text-(--accent)">
                     {ownerName ? ownerName[0] : 'H'}
@@ -222,10 +274,10 @@ const VehicleDetails = () => {
                   {userEmail && <p className="mt-1 text-[12px] text-(--text-muted)/90">Contact: {userEmail}</p>}
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right column – Booking card */}
-            <div className="w-full lg:w-[340px]">
+            <motion.div variants={bookingCardSlide} className="w-full lg:w-[340px]">
               <div className="rounded-2xl border border-white/10 bg-(--accent-cyan)/20 px-4 py-5 md:px-5 md:py-6 space-y-4">
                 <div>
                   <h3 className="text-base font-semibold text-(--text-primary)">Booking Details</h3>
@@ -256,16 +308,20 @@ const VehicleDetails = () => {
                     </div>
                   </div>
 
-                  <button className="mt-3 w-full rounded-full bg-(--accent) px-4 py-2.5 text-sm font-semibold text-white shadow-[0_14px_40px_rgba(34,211,238,0.5)] transition-all duration-500 hover:bg-(--accent-cyan) hover:text-black hover:shadow-[0_18px_60px_rgba(34,211,238,0.65)] active:scale-95 cursor-pointer">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="mt-3 w-full rounded-full bg-(--accent) px-4 py-2.5 text-sm font-semibold text-white shadow-[0_14px_40px_rgba(34,211,238,0.5)] transition-all duration-500 hover:bg-(--accent-cyan) hover:text-black hover:shadow-[0_18px_60px_rgba(34,211,238,0.65)] active:scale-95 cursor-pointer"
+                  >
                     Request Ride
-                  </button>
+                  </motion.button>
                 </form>
 
                 <p className="text-[11px] text-(--text-muted) mt-1">*Your host will confirm the pickup details shortly.</p>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

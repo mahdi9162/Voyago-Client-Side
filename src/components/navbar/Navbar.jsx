@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import Container from '../container/Container';
 import { Link } from 'react-router';
 import { NavLink } from 'react-router';
@@ -8,12 +8,13 @@ import ThemeToggle from '../ui/ThemeToggle';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
 import { notifyError, notifySuccess } from '../../utils/toastService';
-import avaterImg from '../../assets/images/avater.png';
 import Spinner from '../../utils/Spinner';
 
 const Navbar = () => {
   const { theme } = use(ThemeContext);
   const { UserSignOut, user, loading } = use(AuthContext);
+  const [avatarError, setAvatarError] = useState(false);
+  const avatarLetter = (user?.displayName || 'U').charAt(0);
 
   const links = (
     <>
@@ -62,6 +63,7 @@ const Navbar = () => {
         notifySuccess('👋 You’ve been logged out successfully. See you next time on Voyago!');
       })
       .catch((error) => {
+        console.log(error);
         notifyError('⚠️ Logout failed! Please try again.');
       });
   };
@@ -109,15 +111,39 @@ const Navbar = () => {
                 </div>
               </Link>
             </div>
+
+            {/* Center nav links */}
             <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal gap-4 px-1">{links}</ul>
+              {loading ? (
+                <>
+                  {/* Skeleton start (center nav) */}
+                  <div className="flex items-center gap-4">
+                    <div className="h-9 w-20 rounded-full bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                    <div className="h-9 w-24 rounded-full bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                    <div className="h-9 w-24 rounded-full bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                    <div className="h-9 w-24 rounded-full bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                    <div className="h-9 w-24 rounded-full bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                  </div>
+                  {/* Skeleton end (center nav) */}
+                </>
+              ) : (
+                <ul className="menu menu-horizontal gap-4 px-1">{links}</ul>
+              )}
             </div>
+
+            {/* Right side (auth + theme) */}
             <div className="navbar-end gap-4">
               {loading ? (
-                <div className="flex items-center gap-4">
-                  <div className="h-10 w-24 rounded-lg bg-white/10 animate-pulse"></div>
-                  <div className="h-10 w-10 rounded-full bg-white/10 animate-pulse"></div>
-                </div>
+                <>
+                  {/* Skeleton start (right side button) */}
+                  <div className="flex items-center gap-4">
+                    {/* Logout button placeholder */}
+                    <div className="h-10 w-24 rounded-lg bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                    {/* Avatar placeholder */}
+                    <div className="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                  </div>
+                  {/* Skeleton end (right side button) */}
+                </>
               ) : user ? (
                 // login (Show Logout and Avatar)
                 <>
@@ -135,8 +161,12 @@ const Navbar = () => {
                   <Link to="/" className="inline">
                     <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
                       <div className="avatar avatar-online">
-                        <div className="w-10 rounded-full">
-                          <img src={user?.photoURL ? user?.photoURL : avaterImg} alt={user?.displayName || 'User Avatar'} />
+                        <div className="w-10 rounded-full overflow-hidden bg-gray-700 text-white text-lg font-semibold flex items-center justify-center">
+                          {!avatarError && user?.photoURL ? (
+                            <img src={user.photoURL} alt={user?.displayName || 'User Avatar'} onError={() => setAvatarError(true)} />
+                          ) : (
+                            <span>{avatarLetter}</span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -161,6 +191,7 @@ const Navbar = () => {
                   </Link>
                 </>
               )}
+
               <div className="hidden lg:flex">
                 <ThemeToggle />
               </div>

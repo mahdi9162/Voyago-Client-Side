@@ -12,7 +12,8 @@ const useVehicles = (dataLink) => {
         const response = await axios.get(`${dataLink}`);
         setVehiclse(response);
       } catch (err) {
-        setError('Could not fetch vehicle data.');
+        setError('Unable to load vehicle data. Please try again.');
+        console.error('Vehicle fetch error:', err);
       } finally {
         setLoading(false);
       }

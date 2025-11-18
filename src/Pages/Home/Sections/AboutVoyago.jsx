@@ -3,20 +3,24 @@ import Container from '../../../components/container/Container';
 
 const AboutVoyago = () => {
   return (
-    <section className="my-20 px-3 lg:px-0">
+    <section className="my-10 lg:my-20 px-3 lg:px-0">
       <Container>
         {/* Top intro */}
         <div className="max-w-3xl mb-10">
-          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-(--accent)">About Voyago</p>
-          <h1 className="mt-3 text-3xl md:text-4xl font-semibold text-(--text-primary)">Smarter way to book your next ride.</h1>
-          <p className="mt-4 text-(--text-muted)">
+          <p data-aos="fade-right" className="text-xs font-semibold tracking-[0.25em] uppercase text-(--accent)">
+            About Voyago
+          </p>
+          <h2 data-aos="fade-right" data-aos-delay="60" className="mt-3 text-3xl md:text-4xl font-semibold text-(--text-primary)">
+            Smarter way to book your next ride.
+          </h2>
+          <p data-aos="fade-right" data-aos-delay="120" className="mt-4 text-sm text-justify lg:text-base text-(--text-muted)">
             Voyago is a smart vehicle booking platform that connects travelers with trusted local hosts. Compare electric, SUVs and city
             cars in one place, see real reviews, and book in a few clicks — no hidden steps, no confusion.
           </p>
         </div>
 
         {/* Main content grid */}
-        <div className="grid gap-6 lg:grid-cols-[1.4fr,1fr]">
+        <div data-aos="fade-up" data-aos-delay="120" className="grid gap-6 lg:grid-cols-[1.4fr,1fr]">
           {/* Left - Story + bullets */}
           <div className="bg-(--bg-secondary)/70 border border-white/10 rounded-3xl p-6 md:p-8 shadow-lg backdrop-blur-2xl">
             <h2 className="text-xl md:text-2xl font-semibold text-(--text-primary)">Why Voyago?</h2>
@@ -28,8 +32,12 @@ const AboutVoyago = () => {
             </p>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {/* Bullet 1 */}
-              <div className="rounded-2xl bg-(--accent-cyan)/20 border border-white/10 p-4 flex flex-col gap-2">
+              {/* Card 1 */}
+              <div
+                data-aos="fade-up"
+                data-aos-delay="160"
+                className="rounded-2xl bg-(--accent-cyan)/20 border border-white/10 p-4 flex flex-col gap-2"
+              >
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-(--accent)/10 text-(--accent) text-lg">
                   🚗
                 </span>
@@ -39,8 +47,12 @@ const AboutVoyago = () => {
                 </p>
               </div>
 
-              {/* Bullet 2 */}
-              <div className="rounded-2xl bg-(--accent-cyan)/20 border border-white/10 p-4 flex flex-col gap-2">
+              {/* Card 2 */}
+              <div
+                data-aos="fade-up"
+                data-aos-delay="220"
+                className="rounded-2xl bg-(--accent-cyan)/20 border border-white/10 p-4 flex flex-col gap-2"
+              >
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-(--accent)/10 text-(--accent) text-lg">
                   🤝
                 </span>
@@ -50,8 +62,12 @@ const AboutVoyago = () => {
                 </p>
               </div>
 
-              {/* Bullet 3 */}
-              <div className="rounded-2xl bg-(--accent-cyan)/20 border border-white/10 p-4 flex flex-col gap-2">
+              {/* Card 3 */}
+              <div
+                data-aos="fade-up"
+                data-aos-delay="280"
+                className="rounded-2xl bg-(--accent-cyan)/20 border border-white/10 p-4 flex flex-col gap-2"
+              >
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-(--accent)/10 text-(--accent) text-lg">
                   ⚡
                 </span>
@@ -61,8 +77,12 @@ const AboutVoyago = () => {
                 </p>
               </div>
 
-              {/* Bullet 4 */}
-              <div className="rounded-2xl bg-(--accent-cyan)/20 border border-white/10 p-4 flex flex-col gap-2">
+              {/* Card 4 */}
+              <div
+                data-aos="fade-up"
+                data-aos-delay="340"
+                className="rounded-2xl bg-(--accent-cyan)/20 border border-white/10 p-4 flex flex-col gap-2"
+              >
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-(--accent)/10 text-(--accent) text-lg">
                   🌍
                 </span>
@@ -77,7 +97,11 @@ const AboutVoyago = () => {
           {/* Right: How it works & stats card */}
           <div className="space-y-4">
             {/* How it works card */}
-            <div className="bg-(--accent-cyan)/20 border border-white/10 rounded-3xl p-6 shadow-xl backdrop-blur-2xl">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="140"
+              className=" bg-(--accent-cyan)/20 border border-white/10 rounded-3xl p-6 shadow-xl backdrop-blur-2xl"
+            >
               <h2 className="text-lg md:text-xl font-semibold text-(--text-primary)">How Voyago works</h2>
               <ol className="mt-4 space-y-3 text-sm text-(--text-muted)">
                 <li>
@@ -104,7 +128,11 @@ const AboutVoyago = () => {
             </div>
 
             {/* footer about */}
-            <div className="bg-(--accent)/60 border text-white border-white/10 rounded-3xl px-5 py-4 flex items-center justify-between gap-4 text-sm">
+            <div
+              data-aos="zoom-in-up"
+              data-aos-delay="200"
+              className="bg-(--accent)/60 border text-white border-white/10 rounded-3xl px-5 py-4 flex items-center justify-between gap-4 text-sm"
+            >
               <div>
                 <p className="text-lg font-semibold ">200+ vehicles</p>
                 <p className="text-xs ">across multiple categories</p>

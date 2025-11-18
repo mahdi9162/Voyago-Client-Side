@@ -5,8 +5,10 @@ import axios from 'axios';
 import { notifyError, notifySuccess } from '../../utils/toastService';
 import { Link, useNavigate } from 'react-router';
 import previewCarImg from '../../assets/images/previewCar.jpg';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 const AddVehicle = () => {
+  const { theme } = use(ThemeContext);
   const { user, loading: authLoading } = use(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -68,6 +70,7 @@ const AddVehicle = () => {
       form.reset();
       navigate('/my-vehicles');
     } catch (error) {
+      console.log(error);
       notifyError('Couldn’t add the vehicle. Please try again.');
     } finally {
       setLoading(false);
@@ -81,8 +84,12 @@ const AddVehicle = () => {
           {/* Header */}
           <div className="mb-10 flex flex-col lg:flex-row text-center lg:text-left items-center bg-accent/10 rounded-2xl p-4 justify-between gap-4">
             <div>
-              <h2 className="text-2xl md:text-4xl font-semibold text-(--text-primary)">Add a new vehicle</h2>
-              <p className="mt-1 text-xs md:text-base text-(--text-muted)">Fill in the details below to list your vehicle on Voyago.</p>
+              <h2 data-aos="fade-right" className="text-2xl md:text-4xl font-semibold text-(--text-primary)">
+                Add a new vehicle
+              </h2>
+              <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-xs md:text-base text-(--text-muted)">
+                Fill in the details below to list your vehicle on Voyago.
+              </p>
             </div>
 
             <div className="flex items-center gap-2 rounded-full bg-(--accent-cyan)/20 px-4 py-2 text-xs md:text-sm text-(--text-muted) border border-white/10">
@@ -96,11 +103,13 @@ const AddVehicle = () => {
 
           {/* Main glass panel */}
           <div
+            data-aos="fade-up"
+            data-aos-delay="120"
             className="
-        rounded-3xl border border-cyan-400/20
-        bg-(--bg-secondary)/80
-        shadow-[0_0_0_1px_rgba(15,23,42,0.75),0_40px_120px_rgba(0,0,0,0.85)]
-        backdrop-blur-2xl
+        rounded-3xl 
+    bg-(--bg-secondary)/60
+    border border-white/10
+    shadow-xl backdrop-blur-xl
         px-6 py-8 md:px-10 md:py-10
       "
           >
@@ -286,7 +295,11 @@ const AddVehicle = () => {
                   </div>
 
                   {/* Preview card */}
-                  <div className="rounded-2xl border border-white/10 bg-(--accent-cyan)/20 px-5 py-5 shadow-lg">
+                  <div
+                    data-aos="zoom-in"
+                    data-aos-delay="200"
+                    className="rounded-2xl border border-white/10 bg-(--accent-cyan)/20 px-5 py-5 shadow-lg"
+                  >
                     <h3 className="text-sm font-semibold text-(--text-primary)">Preview Card</h3>
 
                     <div className="mt-3 overflow-hidden rounded-2xl bg-black/40">

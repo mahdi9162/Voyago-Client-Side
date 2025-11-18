@@ -23,9 +23,10 @@ const TopNewArrivals = () => {
     return <p>{error}</p>;
   }
 
+
   return (
     <>
-      <section className="my-30 px-3 lg:px-0">
+      <section className="my-10 lg:my-20 px-3 lg:px-0">
         <Container>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-semibold text-(--text-primary)">Top New Arrivals</h2>
@@ -36,8 +37,8 @@ const TopNewArrivals = () => {
           </div>
 
           <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {latestVehicles.map((vehicle) => (
-              <VehicleCard key={vehicle._id} vehicle={vehicle} />
+            {latestVehicles.map((vehicle, i) => (
+              <VehicleCard key={vehicle._id} vehicle={vehicle} index={i} />
             ))}
           </div>
         </Container>

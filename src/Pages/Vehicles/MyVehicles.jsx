@@ -10,6 +10,7 @@ import axios from 'axios';
 import { notifyError } from '../../utils/toastService';
 import emptyVehicleAnimation from '../../assets/images/Searching for a car.json';
 import Lottie from 'lottie-react';
+import Spinner from '../../utils/Spinner';
 
 const MyVehicles = () => {
   const { myVehicles, loading } = useMyVehicles();
@@ -21,7 +22,11 @@ const MyVehicles = () => {
   }
 
   if (loading) {
-    return;
+    return (
+      <div className="mt-20">
+        <Spinner></Spinner>
+      </div>
+    );
   }
 
   if (myVehicles.length === 0) {
@@ -74,6 +79,7 @@ const MyVehicles = () => {
             window.location.reload();
           })
           .catch((error) => {
+            console.log(error);
             notifyError('Failed to delete vehicle. Server error.');
           });
       }
@@ -85,13 +91,17 @@ const MyVehicles = () => {
   };
 
   return (
-    <section className="my-16 px-3 lg:px-0">
+    <section className="my-10 lg:my-20 px-3 lg:px-0">
       <Container>
         {/* Header */}
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-(--text-primary)">My Vehicles</h1>
-            <p className="text-(--text-muted) text-xs md:text-base">Manage all the vehicles you've added to Voyago.</p>
+            <h1 data-aos="fade-right" className="text-2xl md:text-3xl font-semibold text-(--text-primary)">
+              My Vehicles
+            </h1>
+            <p data-aos="fade-right" data-aos-delay="80" className="text-(--text-muted) text-xs md:text-base">
+              Manage all the vehicles you've added to Voyago.
+            </p>
           </div>
 
           <div className="flex items-center gap-3">
@@ -105,15 +115,15 @@ const MyVehicles = () => {
         </div>
 
         {/* Top toolbar */}
-        <div className="mb-5 flex px-5 py-3 items-center justify-end md:justify-between rounded-2xl border border-white/10 bg-(--bg-secondary)/70  text-sm text-(--text-muted) shadow-[0_14px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-          <p className="hidden md:block">
+        <div className="mb-5 flex px-5 py-3 items-center md:justify-between rounded-2xl border border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-xl text-sm text-(--text-muted)">
+          <p data-aos="fade-up" data-aos-delay="120">
             You've added <span className="font-semibold text-(--text-primary)">{myVehicles.length}</span> vehicles
           </p>
         </div>
 
         {/* Desktop table */}
         <div className="hidden md:block">
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-(--bg-secondary)/75 shadow-[0_24px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-(--bg-secondary)/60   shadow-xl backdrop-blur-xl">
             {/* Table head */}
             <div className="grid grid-cols-[minmax(0,2.4fr)_minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1.3fr)] border-b border-white/10 bg-white/5 px-6 py-3 text-xs font-semibold uppercase tracking-wide text-(--text-muted)">
               <span>Vehicle</span>
@@ -125,10 +135,12 @@ const MyVehicles = () => {
 
             {/* Table body */}
             <div className="divide-y divide-white/8">
-              {myVehicles.map((vehicle) => {
+              {myVehicles.map((vehicle, index) => {
                 const formattedDate = format(new Date(vehicle.createdAt), 'MMM dd, yyyy');
                 return (
                   <div
+                    data-aos="fade-up"
+                    data-aos-delay={160 + index * 80}
                     key={vehicle._id}
                     className="grid grid-cols-[minmax(0,2.4fr)_minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1.3fr)] items-center px-6 py-4 text-sm text-(--text-muted) hover:bg-white/3 transition-colors duration-150"
                   >
@@ -207,10 +219,10 @@ const MyVehicles = () => {
             return (
               <div
                 key={vehicle._id}
-                className="rounded-2xl border border-white/10 bg-(--bg-secondary)/80 p-4 shadow-[0_16px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl"
+                className="rounded-2xl border border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-xl p-4"
               >
                 <div className="flex items-center gap-4 mb-3">
-                  <div className="h-14 w-20 overflow-hidden rounded-xl bg-black/30">
+                  <div className="h-14 w-20 overflow-hidden rounded-xl bg-(--bg-secondary)/60">
                     <img
                       src={vehicle.coverImage ? vehicle.coverImage : carImg}
                       alt={vehicle.vehicleName}
@@ -245,7 +257,7 @@ const MyVehicles = () => {
                   <div className="flex gap-2">
                     <Link
                       to={`/update-vehicle/${vehicle._id}`}
-                      className="inline-flex items-center justify-center rounded-full border border-(--accent)/60 bg-(--accent)/10 px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-(--accent) hover:text-slate-900 transition-all duration-150"
+                      className="inline-flex items-center justify-center rounded-full border border-(--accent)/60 bg-(--accent)/10 px-3 py-1.5 text-xs font-semibold hover:bg-(--accent) hover:text-slate-900 transition-all duration-150"
                     >
                       Update
                     </Link>

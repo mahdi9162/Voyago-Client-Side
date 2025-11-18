@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../../components/container/Container';
 import useVehicles from '../../hooks/useVehicles';
 import VehicleCard from '../Home/Sections/VehicleCard';
@@ -18,7 +18,15 @@ const AllVehicles = () => {
   const [sortByPrice, setSortByPrice] = useState(SORT.LOW_TO_HIGH);
 
   const { vehicles, loading, error } = useVehicles('https://voyago-server-side.vercel.app/vehicles');
-  const allVehicles = vehicles.data;
+  const allVehicles = vehicles.data || [];
+
+  // 🔹 Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 6;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, selectedLocation, sortByPrice]);
 
   if (loading) {
     return (
@@ -53,6 +61,15 @@ const AllVehicles = () => {
       return priceB - priceA;
     }
   });
+
+  // Pagination start
+  const totalPages = Math.ceil(sortedVehicles.length / pageSize);
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  const currentVehicles = sortedVehicles.slice(startIndex, endIndex);
+  // Pagination end
 
   return (
     <section className="my-6 md:my-10 lg:my-20 px-3 lg:px-0">
@@ -155,10 +172,53 @@ const AllVehicles = () => {
           </p>
         </div>
         <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {sortedVehicles.map((vehicle) => (
+          {currentVehicles.map((vehicle) => (
             <VehicleCard key={vehicle._id} vehicle={vehicle}></VehicleCard>
           ))}
         </div>
+
+        {/* Pagination start */}
+        <div className="flex items-center justify-center gap-2 mt-8">
+          {/* Prev */}
+          <button
+            type="button"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-3 cursor-pointer py-1.5 rounded-full text-xs md:text-sm border border-white/15 text-(--text-primary)
+               disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/5"
+          >
+            Prev
+          </button>
+
+          {/* Page numbers */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              type="button"
+              onClick={() => setCurrentPage(page)}
+              className={`px-3 py-1.5 rounded-full text-xs md:text-sm border cursor-pointer
+        ${
+          page === currentPage
+            ? 'bg-(--accent-cyan) text-black font-semibold border-(--accent-cyan) shadow-[0_10px_30px_rgba(34,211,238,0.6)] cursor-pointer'
+            : 'border-white/15 text-(--text-muted) hover:text-(--text-primary) cursor-pointer hover:bg-white/5'
+        }`}
+            >
+              {page}
+            </button>
+          ))}
+
+          {/* Next */}
+          <button
+            type="button"
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages || totalPages === 0}
+            className="px-3 py-1.5 rounded-full cursor-pointer text-xs md:text-sm border border-white/15 text-(--text-primary)
+               disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/5"
+          >
+            Next
+          </button>
+        </div>
+        {/* Pagination end */}
       </Container>
     </section>
   );

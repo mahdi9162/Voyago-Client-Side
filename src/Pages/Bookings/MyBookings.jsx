@@ -4,12 +4,17 @@ import { format } from 'date-fns';
 import { Link, useNavigate } from 'react-router';
 import noBookingsAnimation from '../../assets/images/Stuck gears _ Ignite Animation.json';
 import Lottie from 'lottie-react';
+import Spinner from '../../utils/Spinner';
 const MyBookings = () => {
   const { bookings, loading } = useBookings();
   const navigate = useNavigate();
 
   if (loading) {
-    return;
+    return (
+      <div className="mt-20">
+        <Spinner></Spinner>
+      </div>
+    );
   }
 
   if (bookings.length === 0) {
@@ -21,7 +26,8 @@ const MyBookings = () => {
         <p className="text-lg text-(--text-muted)">No active ride requests</p>
         <Link
           to="/all-vehicles"
-          className="text-sm px-4 py-2 rounded-full bg-(--accent) text-white shadow-md hover:bg-(--accent-cyan) transition duration-500">
+          className="text-sm px-4 py-2 rounded-full bg-(--accent) text-white shadow-md hover:bg-(--accent-cyan) transition duration-500"
+        >
           Browse vehicles
         </Link>
       </div>
@@ -37,13 +43,17 @@ const MyBookings = () => {
       <Container>
         {/* Page Header */}
         <div className="mb-6 md:mb-10">
-          <h2 className="text-xl md:text-3xl font-semibold text-(--text-primary)">My Bookings</h2>
-          <p className="text-(--text-muted) text-sm md:text-base mt-1">View and manage your ride requests.</p>
+          <h2 data-aos="fade-right" className="text-xl md:text-3xl font-semibold text-(--text-primary)">
+            My Bookings
+          </h2>
+          <p data-aos="fade-right" className="text-(--text-muted) text-sm md:text-base mt-1">
+            View and manage your ride requests.
+          </p>
         </div>
 
         {/* Booking List */}
         <div className="space-y-6">
-          {bookings.map((booking) => {
+          {bookings.map((booking, index) => {
             const { pickupLocation, tripStartDate, userEmail, userName, vehicleId, perDayCost, status, createdAt, _id } = booking;
 
             const tripStartFormatted = format(new Date(tripStartDate || new Date()), 'MMM dd, yyyy');
@@ -51,8 +61,10 @@ const MyBookings = () => {
             // Booking card
             return (
               <div
+                data-aos="fade-up"
+                data-aos-delay={index * 80}
                 key={_id || vehicleId}
-                className="bg-(--bg-secondary)/70 border border-white/10 rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl px-2 md:px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-6"
+                className="border border-white/10 bg-(--bg-secondary)/60 rounded-3xl shadow-xl backdrop-blur-xl px-4 md:px-6 py-6 flex flex-col md:flex-row md:items-center justify-between gap-6"
               >
                 {/* Left: Booking Info */}
                 <div className="flex-1 space-y-3">
@@ -87,7 +99,7 @@ const MyBookings = () => {
                 </div>
 
                 {/* Right: Payment + Date */}
-                <div className="text-center md:text-right space-y-2">
+                <div className="text-left md:text-right space-y-2">
                   <p className="text-xl font-semibold text-(--text-primary)">
                     ${perDayCost}
                     <span className="text-sm font-normal text-(--text-muted)"> /day</span>

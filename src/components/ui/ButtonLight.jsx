@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonLight = ({children}) => {
+const ButtonLight = ({ children }) => {
   return (
     <StyledWrapper>
       <button className="cssbuttons-io-button">
@@ -54,14 +54,14 @@ const StyledWrapper = styled.div`
     transition: all 0.3s;
   }
 
-  .cssbuttons-io-button:hover .icon {
-    width: calc(100% - 0.6em);
-  }
-
   .cssbuttons-io-button .icon svg {
     width: 1.1em;
     transition: transform 0.3s;
     color: #7b52b9;
+  }
+
+  .cssbuttons-io-button:hover .icon {
+    width: calc(100% - 0.6em);
   }
 
   .cssbuttons-io-button:hover .icon svg {
@@ -70,6 +70,29 @@ const StyledWrapper = styled.div`
 
   .cssbuttons-io-button:active .icon {
     transform: scale(0.95);
+  }
+
+  /* 🔹 Mobile */
+  @media (max-width: 640px) {
+    .cssbuttons-io-button {
+      font-size: 14px;
+      height: 3em; 
+      padding-left: 1em;
+      padding-right: 3em;
+      border-radius: 0.8em;
+    }
+
+    .cssbuttons-io-button .icon {
+      height: 1.9em;
+      width: 1.9em;
+      right: 0.25em;
+      border-radius: 0.6em;
+      box-shadow: 0.08em 0.08em 0.4em 0.15em #7b52b9;
+    }
+
+    .cssbuttons-io-button .icon svg {
+      width: 0.95em;
+    }
   }
 `;
 
