@@ -174,20 +174,24 @@ This project brings together secure authentication, complete CRUD functionality,
 
 ---
 
-## 🔧 How to Run Locally
+## ⚙️ Project Setup
 
-### **Frontend**
+To run the project locally:
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/mahdi9162/Voyago-Client-Side.git
+
+# 2. Navigate to project folder
+cd Skillora
+
+# 3. Install dependencies
 npm install
+
+# 4. Create .env.local file and add your Firebase config keys
+
+# 5. Start the development server
 npm run dev
-```
-
-### **Backend**
-
-```bash
-npm install
-node index.js
 ```
 
 ---
