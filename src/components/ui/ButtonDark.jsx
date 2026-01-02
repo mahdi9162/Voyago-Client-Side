@@ -5,7 +5,7 @@ const Button = ({ children }) => {
     <button
       className="
         relative inline-flex overflow-hidden rounded-lg p-px focus:outline-none 
-        active:scale-95 transition-transform duration-500 hover:scale-105 h-11 md:h-12              
+        active:scale-95 transition-transform duration-500 hover:scale-105 h-11 md:h-12 cursor-pointer              
       "
     >
       <span

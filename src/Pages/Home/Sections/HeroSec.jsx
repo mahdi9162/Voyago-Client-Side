@@ -35,7 +35,7 @@ const HeroSec = () => {
 
   return (
     <>
-      <section className=" relative h-[600px] md:h-[800px] ">
+      <section className=" relative h-[600px] md:h-[700px] ">
         {/* Motion start - hero background fade */}
         <motion.div
           key={theme}

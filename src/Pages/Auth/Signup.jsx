@@ -45,7 +45,7 @@ const imageVariants = {
 
 const Signup = () => {
   const { theme } = use(ThemeContext);
-  const { setUser, setLoading, userSignup, userLoginWithGoogle } = use(AuthContext);
+  const { loading, setUser, setLoading, userSignup, userLoginWithGoogle } = use(AuthContext);
   const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
   const signupImage = theme === 'dark' ? signupDark : signupLight;
@@ -210,7 +210,7 @@ const Signup = () => {
                     </div>
 
                     <div className="w-full ">
-                      <LoginButton>Signup</LoginButton>
+                      <LoginButton>{loading ? 'Signing in…' : 'Sign Up'}</LoginButton>
                     </div>
                   </div>
                 </div>

@@ -3,7 +3,7 @@
 
 @import 'tailwindcss';
 @plugin "daisyui" {
-  themes: winter --default, dark --prefersdark;
+  
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

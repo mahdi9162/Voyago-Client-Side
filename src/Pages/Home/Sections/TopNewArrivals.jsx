@@ -5,6 +5,7 @@ import VehicleCard from './VehicleCard';
 import { Link } from 'react-router';
 import { ThemeContext } from '../../../context/ThemeProvider';
 import Spinner from '../../../utils/Spinner';
+import { Element } from 'react-scroll';
 
 const TopNewArrivals = () => {
   const { theme } = use(ThemeContext);
@@ -23,9 +24,8 @@ const TopNewArrivals = () => {
     return <p>{error}</p>;
   }
 
-
   return (
-    <>
+    <Element name="top-arrivals">
       <section className="my-10 lg:my-20 px-3 lg:px-0">
         <Container>
           <div className="flex items-center justify-between mb-6">
@@ -43,7 +43,7 @@ const TopNewArrivals = () => {
           </div>
         </Container>
       </section>
-    </>
+    </Element>
   );
 };
 

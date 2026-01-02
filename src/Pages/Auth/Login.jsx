@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import Container from '../../components/container/Container';
 import loginImgLight from '../../assets/images/LightLogin.webp';
 import loginImgDark from '../../assets/images/loginDark.webp';
@@ -11,10 +11,12 @@ import { notifyError, notifySuccess } from '../../utils/toastService';
 import logoImgLight from '../../assets/images/logo2.webp';
 import logoImgDark from '../../assets/images/logo.webp';
 import { motion } from 'framer-motion';
+import { validatePassword } from '../../utils/validation';
 
 const Login = () => {
   const { theme } = use(ThemeContext);
-  const { setLoading, setUser, userSignin, userLoginWithGoogle } = use(AuthContext);
+  const { loading, setLoading, setUser, userSignin, userLoginWithGoogle } = use(AuthContext);
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,6 +29,14 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    // Password Validation
+    const validationMsg = validatePassword(password);
+    if (validationMsg) {
+      setPasswordError(validationMsg);
+      return;
+    }
+    setPasswordError('');
 
     // User Signin
     userSignin(email, password)
@@ -149,6 +159,16 @@ const Login = () => {
                   focus:outline-none focus:ring-2 focus:ring-(--accent)
                 "
                       />
+                      {passwordError && (
+                        <motion.p
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className=" text-xs font-medium text-red-400 py-2"
+                        >
+                          🚫 {passwordError}
+                        </motion.p>
+                      )}
                     </div>
 
                     {/* Links */}
@@ -164,7 +184,7 @@ const Login = () => {
                       </p>
                     </div>
                     <div className="pt-2 w-full">
-                      <LoginButton>Login</LoginButton>
+                      <LoginButton>{loading ? 'Logging in…' : 'Login'}</LoginButton>
                     </div>
                   </div>
                 </div>
