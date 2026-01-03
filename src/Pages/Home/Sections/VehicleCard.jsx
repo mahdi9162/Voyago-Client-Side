@@ -6,11 +6,6 @@ import { Link } from 'react-router';
 
 const VehicleCard = ({ vehicle, index }) => {
   const { theme } = use(ThemeContext);
-  const { user, loading } = use(AuthContext);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
 
   const { _id, vehicleName, vehicleModel, pricePerDay, fuelType, transmission, seats, coverImage } = vehicle || {};
 
@@ -50,7 +45,7 @@ const VehicleCard = ({ vehicle, index }) => {
 
           {/* Title + price */}
           <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between gap-2">
-            <h3 className="text-white font-semibold text-sm sm:text-base truncate">
+            <h3 className="text-white font-semibold text-sm truncate">
               {vehicleName} {vehicleModel}
             </h3>
 
@@ -96,7 +91,7 @@ const VehicleCard = ({ vehicle, index }) => {
           </div>
 
           {/* Right button */}
-          <Link to={user ? `/vehicle-details/${_id}` : `/login`} type="button" className={theme === 'dark' ? 'dark-view' : 'light-view'}>
+          <Link to={`/vehicle-details/${_id}`} type="button" className={theme === 'dark' ? 'dark-view' : 'light-view'}>
             View details
           </Link>
         </div>

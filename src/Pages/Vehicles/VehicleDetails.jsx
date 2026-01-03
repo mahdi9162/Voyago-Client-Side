@@ -52,7 +52,6 @@ const VehicleDetails = () => {
   const { user } = use(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
-
   const { vehicles, loading } = useVehicles('https://voyago-server-side.vercel.app/vehicles');
   const allVehicles = vehicles?.data || [];
 
@@ -99,6 +98,7 @@ const VehicleDetails = () => {
 
     if (!user) {
       navigate('/login');
+      notifyError('Please log in to request this ride.');
       return;
     }
 

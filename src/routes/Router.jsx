@@ -60,11 +60,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/vehicle-details/:id',
-        element: (
-          <PrivateRoute>
-            <VehicleDetails></VehicleDetails>
-          </PrivateRoute>
-        ),
+        element: <VehicleDetails></VehicleDetails>,
       },
       {
         path: '/update-vehicle/:id',

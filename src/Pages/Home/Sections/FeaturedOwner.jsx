@@ -17,7 +17,7 @@ const FeaturedOwner = () => {
   };
 
   return (
-    <section className="my-10 lg:my-20 px-3 lg:px-0">
+    <section className="my-10 lg:my-14 px-3 lg:px-0">
       <Container>
         {/* Header */}
         <div className="mb-8">

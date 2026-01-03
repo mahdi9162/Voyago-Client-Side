@@ -8,7 +8,6 @@ import previewCarImg from '../../assets/images/previewCar.jpg';
 import { ThemeContext } from '../../context/ThemeProvider';
 
 const AddVehicle = () => {
-  const { theme } = use(ThemeContext);
   const { user, loading: authLoading } = use(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -84,10 +83,10 @@ const AddVehicle = () => {
           {/* Header */}
           <div className="mb-10 flex flex-col lg:flex-row text-center lg:text-left items-center bg-accent/10 rounded-2xl p-4 justify-between gap-4">
             <div>
-              <h2 data-aos="fade-right" className="text-2xl md:text-4xl font-semibold text-(--text-primary)">
+              <h2 data-aos="fade-right" className="text-xl md:text-2xl font-semibold text-(--text-primary)">
                 Add a new vehicle
               </h2>
-              <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-xs md:text-base text-(--text-muted)">
+              <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-xs md:text-base text-(--text-muted)/70">
                 Fill in the details below to list your vehicle on Voyago.
               </p>
             </div>

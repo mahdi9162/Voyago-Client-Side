@@ -98,7 +98,7 @@ const Signup = () => {
     <>
       <Container>
         <section className="bg-(--bg-primary) rounded-4xl">
-          <div className="flex lg:items-center justify-between mt-10 lg:my-20 flex-col lg:flex-row ">
+          <div className="flex lg:items-center justify-between mt-10 lg:my-14 flex-col lg:flex-row ">
             {/* Logo for mobile */}
             <figure className="flex justify-center my-4 lg:hidden">
               <img src={theme === 'dark' ? logoImgDark : logoImgLight} className="w-20" alt="" />

@@ -3,7 +3,7 @@ import Container from '../../../components/container/Container';
 
 const AboutVoyago = () => {
   return (
-    <section className="my-10 lg:my-20 px-3 lg:px-0">
+    <section className="my-10 lg:my-14 px-3 lg:px-0">
       <Container>
         {/* Top intro */}
         <div className="max-w-3xl mb-10">

@@ -68,7 +68,7 @@ const MyVehicles = () => {
       if (result.isConfirmed) {
         axios
           .delete(`https://voyago-server-side.vercel.app/vehicles/${vehicleId}`)
-          .then((res) => {
+          .then(() => {
             Swal.fire({
               title: 'Deleted!',
               text: 'Your vehicle has been deleted.',
@@ -91,7 +91,7 @@ const MyVehicles = () => {
   };
 
   return (
-    <section className="my-10 lg:my-20 px-3 lg:px-0">
+    <section className="my-10 lg:my-14 px-3 lg:px-0">
       <Container>
         {/* Header */}
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -217,10 +217,7 @@ const MyVehicles = () => {
           {myVehicles.map((vehicle) => {
             const formattedDate = format(new Date(vehicle.createdAt), 'MMM dd, yyyy');
             return (
-              <div
-                key={vehicle._id}
-                className="rounded-2xl border border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-xl p-4"
-              >
+              <div key={vehicle._id} className="rounded-2xl border border-white/10 bg-(--bg-secondary)/60 shadow-xl backdrop-blur-xl p-4">
                 <div className="flex items-center gap-4 mb-3">
                   <div className="h-14 w-20 overflow-hidden rounded-xl bg-(--bg-secondary)/60">
                     <img
