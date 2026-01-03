@@ -8,6 +8,7 @@ import ThemeToggle from '../ui/ThemeToggle';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
 import { notifyError, notifySuccess } from '../../utils/toastService';
+import { Link as ScrollLink } from 'react-scroll';
 
 const Navbar = () => {
   const { theme } = use(ThemeContext);
@@ -25,6 +26,11 @@ const Navbar = () => {
       <li>
         <NavLink to="/all-vehicles" className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'}`}>
           All Vehicles
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/contact-us" className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'}`}>
+          Contact Us
         </NavLink>
       </li>
       <li>
@@ -105,7 +111,7 @@ const Navbar = () => {
                     VOYAGO
                   </h2>
 
-                  <p className="text-[9px] md:text-[10px] uppercase tracking-[0.12em] md:tracking-[0.2em] font-bold text-(--text-muted) opacity-70 whitespace-nowrap -ml-4 md:ml-0">
+                  <p className="text-[9px] md:text-[10px] uppercase tracking-[0.12em] md:tracking-[0.2em] font-bold text-(--text-muted) opacity-70 whitespace-nowrap -ml-4 md:ml-0 hidden md:block">
                     Smart Booking Platform
                   </p>
                 </div>

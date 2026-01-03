@@ -91,7 +91,7 @@ const AllVehicles = () => {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8 bg-accent/10 rounded-2xl p-4">
           <div>
             <h1 className="text-lg md:text-2xl font-semibold text-(--text-primary)">All Vehicles</h1>
-            <p className="mt-1 max-w-[36ch] text-[13px] leading-snug md:text-sm md:leading-normal text-(--text-muted)/80">
+            <p className="mt-1 text-[13px] leading-snug md:text-sm md:leading-normal text-(--text-muted)/80">
               Browse and compare every ride available on Voyago.
             </p>
           </div>
@@ -103,7 +103,7 @@ const AllVehicles = () => {
           <div className="mb-4">
             <span className="text-xs font-medium uppercase tracking-wide text-(--text-muted)">Search</span>
 
-            <div className="mt-2 flex items-center gap-2 rounded-2xl border border-white/10 bg-black/10 px-3 py-2">
+            <div className="mt-2 flex items-center gap-2 rounded-2xl border border-white/10 bg-primary/10 px-3 py-2">
               <span className="text-(--text-muted) text-sm animate-search-float">🔎</span>
 
               <input
@@ -135,7 +135,7 @@ const AllVehicles = () => {
 
               <div className="relative">
                 <div
-                  className="flex items-center gap-1 bg-black/10 rounded-full px-1 py-1 border border-white/10
+                  className="flex items-center gap-1 bg-primary/10 rounded-full px-1 py-1 border border-white/10
                         overflow-x-auto whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none]
                         [&::-webkit-scrollbar]:hidden"
                 >
@@ -168,7 +168,7 @@ const AllVehicles = () => {
 
               <div className="relative">
                 <div
-                  className="flex items-center gap-1 bg-black/10 rounded-2xl md:rounded-full px-1 py-1 border border-white/10
+                  className="flex items-center gap-1 bg-primary/10 rounded-2xl md:rounded-full px-1 py-1 border border-white/10
                         overflow-x-auto md:overflow-visible whitespace-nowrap md:whitespace-normal
                         [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                 >
@@ -196,7 +196,7 @@ const AllVehicles = () => {
             <div className="flex flex-col gap-2">
               <span className="text-xs font-medium uppercase tracking-wide text-(--text-muted)">Sort by</span>
 
-              <div className="grid grid-cols-2 bg-black/10 rounded-full p-1 border border-white/10">
+              <div className="grid grid-cols-2 bg-primary/10 rounded-full p-1 border border-white/10">
                 <button
                   type="button"
                   onClick={() => setSortByPrice(SORT.LOW_TO_HIGH)}
@@ -310,7 +310,7 @@ const AllVehicles = () => {
             </div>
 
             {/* Pagination start */}
-            <div className="flex items-center justify-center gap-2 md:mt-8">
+            <div className="flex items-center justify-center gap-2 mt-10 md:mt-16">
               {/* Prev */}
               <button
                 type="button"

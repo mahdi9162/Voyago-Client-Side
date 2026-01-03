@@ -17,7 +17,7 @@ const FeaturedOwner = () => {
   };
 
   return (
-    <section className="my-10 lg:my-14 px-3 lg:px-0">
+    <section className="my-10 lg:my-1 px-3 lg:px-0">
       <Container>
         {/* Header */}
         <div className="mb-8">
@@ -64,7 +64,7 @@ const FeaturedOwner = () => {
                   px-4 py-1.5
                   rounded-full
                   bg-(--accent-cyan)/70
-                  text-xs font-semibold text-black
+                  text-xs font-semibold text-black/70
                   shadow-[0_10px_25px_rgba(0,255,255,0.45)]
                 "
               >
@@ -96,8 +96,7 @@ const FeaturedOwner = () => {
                   px-4 py-2
                   rounded-full
                   bg-(--bg-primary)/70
-                  border border-(--accent)/40
-                  shadow-[0_12px_30px_rgba(0,0,0,0.45)]
+                  shadow-lg shadow-primary/20
                 "
               >
                 <span className="flex items-center gap-1 text-sm font-semibold text-yellow-500">
@@ -164,7 +163,7 @@ const FeaturedOwner = () => {
                   px-5 md:px-6 py-2
                   rounded-full
                   bg-(--accent-cyan)/70
-                  text-[12px] md:text-sm font-semibold text-black
+                  text-[12px] md:text-sm font-semibold text-black/70
                   shadow-[0_14px_35px_rgba(0,255,255,0.4)]
                   transition-all duration-500
                   hover:bg-(--accent-purple)

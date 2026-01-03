@@ -6,7 +6,7 @@ const Tooltip = () => {
     <StyledWrapper>
       <ul className="example-2">
         <li className="icon-content">
-          <a data-social="linkedin" aria-label="LinkedIn" href="https://linkedin.com/">
+          <a data-social="linkedin" aria-label="LinkedIn" target="blank" href="https://www.linkedin.com/in/mahdi9162/">
             <div className="filled" />
             <svg
               xmlSpace="preserve"
@@ -27,7 +27,7 @@ const Tooltip = () => {
         </li>
 
         <li className="icon-content">
-          <a data-social="github" aria-label="GitHub" href="https://github.com/mahdi9162">
+          <a data-social="github" aria-label="GitHub" target="blank" href="https://github.com/mahdi9162">
             <div className="filled" />
             <svg
               xmlSpace="preserve"
@@ -48,7 +48,7 @@ const Tooltip = () => {
         </li>
 
         <li className="icon-content">
-          <a data-social="instagram" aria-label="Instagram" href="https://www.instagram.com/rifu91629/?hl=en">
+          <a data-social="instagram" aria-label="Instagram" target="blank" href="https://www.instagram.com/rifu91629/?hl=en">
             <div className="filled" />
             <svg
               xmlSpace="preserve"
@@ -69,7 +69,7 @@ const Tooltip = () => {
         </li>
 
         <li className="icon-content">
-          <a data-social="youtube" aria-label="Youtube" href="https://youtube.com/">
+          <a data-social="youtube" aria-label="Youtube" target="blank" href="https://www.youtube.com/@ProgrammingHeroCommunity">
             <div className="filled" />
             <svg
               xmlSpace="preserve"

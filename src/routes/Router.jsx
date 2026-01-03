@@ -12,6 +12,8 @@ import VehicleDetails from '../Pages/Vehicles/VehicleDetails';
 import PrivateRoute from './PrivateRoute';
 import UpdateVehicle from '../Pages/Vehicles/UpdateVehicle';
 import NotFound from '../Pages/Error/NotFound';
+import ContactUs from '../Pages/Home/Sections/ContactUs';
+import AboutUs from '../Pages/Footer/AboutUs';
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +71,14 @@ export const router = createBrowserRouter([
             <UpdateVehicle></UpdateVehicle>
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/contact-us',
+        Component: ContactUs,
+      },
+      {
+        path: '/about-us',
+        Component: AboutUs,
       },
       {
         path: '*',

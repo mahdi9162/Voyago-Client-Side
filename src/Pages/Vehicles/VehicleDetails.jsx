@@ -225,7 +225,7 @@ const VehicleDetails = () => {
                     key={coverImage}
                     src={coverImage}
                     alt={`${vehicleName} ${vehicleModel}`}
-                    className="w-full h-80 object-contain rounded-2xl bg-black/10"
+                    className="w-full h-80 object-contain rounded-2xl bg-primary/10"
                     initial={{ scale: 1.05, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}

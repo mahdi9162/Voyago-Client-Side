@@ -16,7 +16,7 @@ const VehicleCard = ({ vehicle, index }) => {
         group relative
         rounded-2xl overflow-hidden
         bg-white/5 border border-white/10
-        shadow-xl shadow-black/40
+        shadow-lg shadow-primary/15
         backdrop-blur-md
         transition-all duration-300
         hover:-translate-y-1

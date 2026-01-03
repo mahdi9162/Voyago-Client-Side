@@ -3,14 +3,14 @@ import Container from '../../../components/container/Container';
 
 const AboutVoyago = () => {
   return (
-    <section className="my-10 lg:my-14 px-3 lg:px-0">
+    <section name="about" className="mt-8 md:mt-10 lg:mt-14 px-3 lg:px-0">
       <Container>
         {/* Top intro */}
-        <div className="max-w-3xl mb-10">
+        <div className="max-w-3xl mb-6 md:mb-10">
           <p data-aos="fade-right" className="text-xs font-semibold tracking-[0.25em] uppercase text-(--accent)">
             About Voyago
           </p>
-          <h2 data-aos="fade-right" data-aos-delay="60" className="mt-3 text-xl md:text-2xl font-semibold text-(--text-primary)">
+          <h2 data-aos="fade-right" data-aos-delay="60" className="mt-1 text-xl md:text-2xl font-semibold text-(--text-primary)">
             A smarter way to book rides.
           </h2>
           <p data-aos="fade-right" data-aos-delay="120" className="mt-4 text-xs md:text-sm text-justify lg:text-base text-(--text-muted)">
@@ -24,7 +24,7 @@ const AboutVoyago = () => {
           {/* Left - Story + bullets */}
           <div className="bg-(--bg-secondary)/70 border border-white/10 rounded-3xl p-6 md:p-8 shadow-lg backdrop-blur-2xl">
             <h2 className="text-xl md:text-2xl font-semibold text-(--text-primary)">Why Voyago?</h2>
-            <p className="mt-3 text-sm md:text-base text-(--text-muted)">
+            <p className="mt-3 text-xs md:text-base text-(--text-muted)">
               We built Voyago for people who want the comfort of their own car, without the headache of a traditional rental desk.
               <span className="lg:block">
                 Every vehicle is verified, every host is reviewed, and pricing stays clear from start to finish.
@@ -107,22 +107,24 @@ const AboutVoyago = () => {
                 <li>
                   <span className="font-semibold text-(--text-primary)">1. Browse vehicles</span>
                   <br />
-                  Filter by category, location and price to find a ride that matches your plan.
+                  <span className="text-xs md:text-sm">Filter by category, location and price to find a ride that matches your plan.</span>
                 </li>
                 <li>
                   <span className="font-semibold text-(--text-primary)">2. Check the host</span>
                   <br />
-                  Review host ratings, response time and vehicle details before you send a request.
+                  <span className="text-xs md:text-sm">
+                    Review host ratings, response time and vehicle details before you send a request.
+                  </span>
                 </li>
                 <li>
                   <span className="font-semibold text-(--text-primary)">3. Send a request</span>
                   <br />
-                  Pick your pick-up date & location, then submit a ride request in one click.
+                  <span className="text-xs md:text-sm">Pick your pick-up date & location, then submit a ride request in one click.</span>
                 </li>
                 <li>
                   <span className="font-semibold text-(--text-primary)">4. Hit the road</span>
                   <br />
-                  Once confirmed, meet your host, grab the keys and start your Voyago trip.
+                  <span className="text-xs md:text-sm">Once confirmed, meet your host, grab the keys and start your Voyago trip.</span>
                 </li>
               </ol>
             </div>
@@ -131,21 +133,30 @@ const AboutVoyago = () => {
             <div
               data-aos="zoom-in-up"
               data-aos-delay="200"
-              className="bg-(--accent)/60 border text-white border-white/10 rounded-3xl px-5 py-4 flex items-center justify-between gap-4 text-sm"
+              className="bg-(--accent)/60 border text-white border-white/10 rounded-3xl px-5 py-4 text-sm"
             >
-              <div>
-                <p className="text-lg font-semibold ">200+ vehicles</p>
-                <p className="text-xs ">across multiple categories</p>
-              </div>
-              <div className="h-10 w-px bg-white/10" />
-              <div>
-                <p className="text-lg font-semibold ">4.8★ average</p>
-                <p className="text-xs ">based on host ratings</p>
-              </div>
-              <div className="h-10 w-px bg-white/10 hidden md:block" />
-              <div className="hidden md:block">
-                <p className="text-lg font-semibold ">Minutes to request</p>
-                <p className="text-xs ">no long forms, no queues</p>
+              {/* Mobile: 2 cols + last full width | Desktop: single row */}
+              <div className="grid grid-cols-2 gap-3 md:flex md:items-center md:justify-between md:gap-4">
+                {/* Stat 1 */}
+                <div className="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 md:bg-transparent md:border-0 md:px-0 md:py-0">
+                  <p className="text-base md:text-lg font-semibold">200+ vehicles</p>
+                  <p className="text-[11px] md:text-xs opacity-90">across multiple categories</p>
+                </div>
+
+                {/* Stat 2 */}
+                <div className="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 md:bg-transparent md:border-0 md:px-0 md:py-0">
+                  <p className="text-base md:text-lg font-semibold">4.8★ average</p>
+                  <p className="text-[11px] md:text-xs opacity-90">based on host ratings</p>
+                </div>
+
+                {/* Desktop divider (between 2 and 3) */}
+                <div className="hidden md:block h-10 w-px bg-white/10" />
+
+                {/* Stat 3 (Mobile: full width centered) */}
+                <div className="col-span-2 text-center rounded-2xl bg-white/10 border border-white/10 px-4 py-3 md:col-span-1 md:text-left md:bg-transparent md:border-0 md:px-0 md:py-0">
+                  <p className="text-base md:text-lg font-semibold">Minutes to request</p>
+                  <p className="text-[11px] md:text-xs opacity-90">no long forms, no queues</p>
+                </div>
               </div>
             </div>
           </div>

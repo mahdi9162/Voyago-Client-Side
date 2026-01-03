@@ -204,7 +204,7 @@ const Login = () => {
               animate="visible"
               className="w-[60%] relative h-[550px] lg:h-[700px] rounded-r-4xl overflow-hidden hidden lg:block"
             >
-              <div className="absolute inset-0 bg-black/10 "></div>
+              <div className="absolute inset-0 bg-primary/10 "></div>
               <motion.img
                 key={theme}
                 src={loginImage}
