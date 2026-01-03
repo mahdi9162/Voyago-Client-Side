@@ -1,11 +1,7 @@
 import './App.css';
 
 function App() {
-  return (
-    <>
-      <p>Hello From Voyago</p>
-    </>
-  );
+  return <></>;
 }
 
 export default App;

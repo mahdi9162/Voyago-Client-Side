@@ -39,20 +39,14 @@ const TopCategories = () => {
       <section className="my-10 lg:my-20 px-3 lg:px-0 ">
         <Container>
           {/* Header */}
-          <div className="flex items-center flex-col md:flex-row text-center md:text-left  md:justify-between gap-4 mb-8 ">
+          <div className="mb-8">
             <div>
-              <h2 data-aos="fade-right" className="text-2xl md:text-3xl font-semibold text-(--text-primary)">
+              <h2 data-aos="fade-right" className="text-xl md:text-3xl font-semibold text-(--text-primary)">
                 Top Categories
               </h2>
-              <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-sm text-(--text-muted)">
+              <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-xs md:text-sm text-(--text-muted)">
                 Find the perfect ride by type
               </p>
-            </div>
-
-            <div>
-              <Link to="/all-vehicles" className={theme === 'dark' ? 'dark-view' : 'light-view'}>
-                View all vehicles →
-              </Link>
             </div>
           </div>
 

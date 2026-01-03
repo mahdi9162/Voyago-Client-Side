@@ -35,25 +35,31 @@ const HeroSec = () => {
 
   return (
     <>
-      <section className=" relative h-[600px] md:h-[700px] ">
+      <section className=" relative h-[400px] md:h-[650px] lg:h-[700px] ">
         {/* Motion start - hero background fade */}
         <motion.div
           key={theme}
-          className={theme === 'dark' ? 'h-full bg-position-[center_bottom] bg-cover w-full ' : 'h-full bg-cover bg-center w-full '}
+          className={`relative ${
+            theme === 'dark' ? 'h-full bg-position-[center_bottom] bg-cover w-full' : 'h-full bg-cover bg-center w-full'
+          }`}
           style={{ backgroundImage: `url(${heroImg})` }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          <div className="absolute inset-0 bg-black/10 "></div>
+          <div
+            className={`absolute inset-0 ${
+              theme === 'dark' ? 'bg-black/20' : 'bg-linear-to-r from-black/80 via-black/45 to-transparent md:from-black/70 md:via-black/35'
+            }`}
+          />
 
-          <Container className="h-full py-20 md:py-30 px-3 lg:px-0">
-            <motion.div className="hero-text h-full" variants={textParentVariants} initial="hidden" animate="visible">
-              <motion.h1 className="text-2xl md:text-4xl lg:text-6xl font-bold" variants={textChildVariants}>
+          <Container className="relative z-10 h-full py-20 md:py-30 px-3 lg:px-0">
+            <motion.div className="text-white h-full" variants={textParentVariants} initial="hidden" animate="visible">
+              <motion.h1 className="text-xl md:text-4xl lg:text-6xl font-bold" variants={textChildVariants}>
                 Every Mile,<span className="block">A Story Worth Driving</span>
               </motion.h1>
 
-              <motion.p className="mt-3 mb-5 text-xs md:text-lg opacity-90 hero-text" variants={textChildVariants}>
+              <motion.p className="mt-3 mb-5 text-xs md:text-lg opacity-90" variants={textChildVariants}>
                 Discover premium car rentals built for comfort,
                 <span className="block">adventure, and unforgettable journeys.</span>
               </motion.p>

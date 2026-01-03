@@ -21,10 +21,10 @@ const FeaturedOwner = () => {
       <Container>
         {/* Header */}
         <div className="mb-8">
-          <h2 data-aos="fade-right" className="text-2xl md:text-3xl font-semibold text-(--text-primary)">
+          <h2 data-aos="fade-right" className="text-xl md:text-2xl font-semibold text-(--text-primary)">
             Trusted Voyago Owner
           </h2>
-          <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-sm md:text-base text-(--text-muted)">
+          <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-xs md:text-base text-(--text-muted)">
             Meet a real host you can count on.
           </p>
         </div>
@@ -115,7 +115,7 @@ const FeaturedOwner = () => {
                   inline-flex items-center gap-1
                   px-3 py-1
                   rounded-full
-                  bg-black/20
+                  bg-primary/20
                   border border-white/10
                   text-(--text-muted)
                 "
@@ -127,7 +127,7 @@ const FeaturedOwner = () => {
                   inline-flex items-center gap-1
                   px-3 py-1
                   rounded-full
-                  bg-black/20
+                  bg-primary/20
                   border border-white/10
                   text-(--text-muted)
                 "
@@ -139,7 +139,7 @@ const FeaturedOwner = () => {
                   inline-flex items-center gap-1
                   px-3 py-1
                   rounded-full
-                  bg-black/20
+                  bg-primary/20
                   border border-white/10
                   text-(--text-muted)
                 "
@@ -150,7 +150,7 @@ const FeaturedOwner = () => {
 
             {/* text */}
             <div>
-              <p className="text-sm md:text-base text-justify leading-relaxed text-(--text-muted)">
+              <p className="text-xs md:text-base text-justify leading-relaxed text-(--text-muted)">
                 Daniel keeps his SUV spotless and always shares local tips with travelers.
                 <span className=" lg:block"> Guests love his quick responses and flexible pickup options.</span>
               </p>
@@ -164,7 +164,7 @@ const FeaturedOwner = () => {
                   px-5 md:px-6 py-2
                   rounded-full
                   bg-(--accent-cyan)/70
-                  text-[13px] md:text-sm font-semibold text-black
+                  text-[12px] md:text-sm font-semibold text-black
                   shadow-[0_14px_35px_rgba(0,255,255,0.4)]
                   transition-all duration-500
                   hover:bg-(--accent-purple)
@@ -174,7 +174,7 @@ const FeaturedOwner = () => {
                   cursor-pointer
                 "
               >
-                View Daniel&apos;s vehicles
+                View Daniel's vehicles
               </button>
             </div>
           </div>

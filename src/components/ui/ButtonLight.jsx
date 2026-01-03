@@ -76,7 +76,7 @@ const StyledWrapper = styled.div`
   @media (max-width: 640px) {
     .cssbuttons-io-button {
       font-size: 14px;
-      height: 3em; 
+      height: 32px; 
       padding-left: 1em;
       padding-right: 3em;
       border-radius: 0.8em;

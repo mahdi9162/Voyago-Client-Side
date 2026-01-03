@@ -10,10 +10,10 @@ const AboutVoyago = () => {
           <p data-aos="fade-right" className="text-xs font-semibold tracking-[0.25em] uppercase text-(--accent)">
             About Voyago
           </p>
-          <h2 data-aos="fade-right" data-aos-delay="60" className="mt-3 text-3xl md:text-4xl font-semibold text-(--text-primary)">
-            Smarter way to book your next ride.
+          <h2 data-aos="fade-right" data-aos-delay="60" className="mt-3 text-xl md:text-2xl font-semibold text-(--text-primary)">
+            A smarter way to book rides.
           </h2>
-          <p data-aos="fade-right" data-aos-delay="120" className="mt-4 text-sm text-justify lg:text-base text-(--text-muted)">
+          <p data-aos="fade-right" data-aos-delay="120" className="mt-4 text-xs md:text-sm text-justify lg:text-base text-(--text-muted)">
             Voyago is a smart vehicle booking platform that connects travelers with trusted local hosts. Compare electric, SUVs and city
             cars in one place, see real reviews, and book in a few clicks — no hidden steps, no confusion.
           </p>
