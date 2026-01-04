@@ -68,7 +68,7 @@ const Login = () => {
 
         notifySuccess(`Logged in successfully! Welcome back ${loginUser?.displayName || 'there'} 🚀`);
         form.reset();
-        navigate(from, { replace: true });
+        navigate(from || '/', { replace: true });
       })
       .catch((error) => {
         if (error.code === 'auth/invalid-credential') {
