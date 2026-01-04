@@ -37,6 +37,14 @@ const StyledWrapper = styled.div`
     box-shadow: none;
     transform: scale(0.98);
   }
+
+  // mobile
+  @media (max-width: 480px) {
+    button {
+      padding-top: 6px;
+      font-size: 14px;
+    }
+  }
 `;
 
 export default Button;

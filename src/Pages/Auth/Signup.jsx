@@ -12,6 +12,7 @@ import GoogleButton from '../../components/ui/GoogleButton';
 import { notifyError, notifySuccess } from '../../utils/toastService';
 import logoImgLight from '../../assets/images/logo2.webp';
 import logoImgDark from '../../assets/images/logo.webp';
+import axiosPublic from '../../api/axiosPublic';
 
 // Motion start
 const formParentVariants = {
@@ -50,12 +51,15 @@ const Signup = () => {
   const navigate = useNavigate();
   const signupImage = theme === 'dark' ? signupDark : signupLight;
 
-  const handleSignupWithEmailPass = (e) => {
+  const handleSignupWithEmailPass = async (e) => {
     e.preventDefault();
     const form = e.target;
 
+    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
+    const role = form.role.value;
+    const photoURL = form.photo.value;
 
     // Password Validation
     const validationMsg = validatePassword(password);
@@ -65,27 +69,63 @@ const Signup = () => {
     }
     setPasswordError('');
 
-    // User Signup with email and password
-    userSignup(email, password)
-      .then((res) => {
-        const loginUser = res.user;
-        setUser(loginUser);
-        notifySuccess(`🎉 Signup successful! Welcome aboard, ${loginUser?.displayName || 'there'} !`);
-        navigate('/');
-      })
-      .catch((error) => {
-        notifyError(`❌ Signup failed! ${error.message}`);
-      })
-      .finally(() => setLoading(false));
+    try {
+      // 🔹 Firebase signup
+      const res = await userSignup(email, password);
+      const signupUser = res.user;
+      setUser(signupUser);
+
+      // 🔹 User data for DB
+      const userData = {
+        firebaseUid: signupUser.uid,
+        name,
+        email,
+        role,
+        photoURL,
+      };
+
+      // 🔹 DB signup
+      await axiosPublic.post('/signup', userData);
+
+      // role localStorage
+      localStorage.setItem('user-role', role);
+      localStorage.setItem('user-email', email);
+
+      notifySuccess(`🎉 Signup successful! Welcome aboard, ${signupUser?.displayName || 'there'}!`);
+      navigate('/');
+    } catch (error) {
+      notifyError(`❌ Signup failed! ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // user Google Login
   const handleGoogleLogin = () => {
     userLoginWithGoogle()
-      .then((res) => {
+      .then(async (res) => {
         const loginUser = res.user;
         setUser(loginUser);
-        notifySuccess(`🎉 Welcome to Voyago ${loginUser?.displayName || 'there'} ! Your account was created successfully via Google.🚀`);
+
+        // 🔹 User data for DB
+        const userData = {
+          firebaseUid: loginUser.uid,
+          name: loginUser.displayName || 'Google User',
+          email: loginUser.email,
+          role: 'user',
+          photoURL: loginUser?.photoURL || '',
+          createdAt: new Date(),
+        };
+
+        // 🔹 DB signup
+        await axiosPublic.post('/signup', userData);
+
+        // role localStorage
+        localStorage.setItem('user-role', 'user');
+        localStorage.setItem('user-email', loginUser.email);
+
+        notifySuccess(`🎉 Welcome to Voyago ${loginUser?.displayName || 'there'}! Your account was created successfully via Google 🚀`);
+
         navigate('/');
       })
       .catch((error) => {
@@ -125,13 +165,7 @@ const Signup = () => {
                         type="text"
                         name="name"
                         placeholder="Name"
-                        className="
-                          input mt-2 w-full rounded-xl
-                          bg-(--bg-primary) text-(--text-primary)
-                          placeholder:text-(--text-muted)
-                          border border-white/10
-                          focus:outline-none focus:ring-2 focus:ring-(--accent)
-                        "
+                        className="input mt-2 w-full rounded-xl bg-(--bg-primary) text-(--text-primary) placeholder:text-(--text-muted) border border-white/10 focus:outline-none focus:ring-2 focus:ring-(--accent)"
                       />
                     </div>
 
@@ -143,13 +177,7 @@ const Signup = () => {
                         type="email"
                         name="email"
                         placeholder="Email"
-                        className="
-                          input mt-2 w-full rounded-xl
-                          bg-(--bg-primary) text-(--text-primary)
-                          placeholder:text-(--text-muted)
-                          border border-white/10
-                          focus:outline-none focus:ring-2 focus:ring-(--accent)
-                        "
+                        className="input mt-2 w-full rounded-xl bg-(--bg-primary) text-(--text-primary) placeholder:text-(--text-muted) border border-white/10 focus:outline-none focus:ring-2 focus:ring-(--accent)"
                       />
                     </div>
 
@@ -161,13 +189,7 @@ const Signup = () => {
                         type="password"
                         name="password"
                         placeholder="Password"
-                        className="
-                          input mt-2 w-full rounded-xl
-                          bg-(--bg-primary) text-(--text-primary)
-                          placeholder:text-(--text-muted)
-                          border border-white/10
-                          focus:outline-none focus:ring-2 focus:ring-(--accent)
-                        "
+                        className="input mt-2 w-full rounded-xl bg-(--bg-primary) text-(--text-primary) placeholder:text-(--text-muted) border border-white/10 focus:outline-none focus:ring-2 focus:ring-(--accent)"
                       />
                       {passwordError && (
                         <motion.p
@@ -189,14 +211,23 @@ const Signup = () => {
                         type="text"
                         name="photo"
                         placeholder="Photo URL"
-                        className="
-                          input mt-2 w-full rounded-xl
-                          bg-(--bg-primary) text-(--text-primary)
-                          placeholder:text-(--text-muted)
-                          border border-white/10
-                          focus:outline-none focus:ring-2 focus:ring-(--accent)
-                        "
+                        className="input mt-2 w-full rounded-xl bg-(--bg-primary) text-(--text-primary) placeholder:text-(--text-muted) border border-white/10 focus:outline-none focus:ring-2 focus:ring-(--accent)"
                       />
+                    </div>
+
+                    {/* Role Selection */}
+                    <div className="flex items-center gap-3 mt-1">
+                      <span className="text-xs font-medium text-(--text-muted)">Register as:</span>
+                      <div className="flex gap-4">
+                        <label className="flex items-center gap-1.5 cursor-pointer text-xs">
+                          <input type="radio" name="role" value="user" defaultChecked className="radio radio-xs checked:bg-(--accent)" />
+                          <span>User</span>
+                        </label>
+                        <label className="flex items-center gap-1.5 cursor-pointer text-xs">
+                          <input type="radio" name="role" value="host" className="radio radio-xs checked:bg-(--accent)" />
+                          <span>Host</span>
+                        </label>
+                      </div>
                     </div>
 
                     {/* Links */}

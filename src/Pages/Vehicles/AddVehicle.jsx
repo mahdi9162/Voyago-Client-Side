@@ -6,18 +6,19 @@ import { notifyError, notifySuccess } from '../../utils/toastService';
 import { Link, useNavigate } from 'react-router';
 import previewCarImg from '../../assets/images/previewCar.jpg';
 import { ThemeContext } from '../../context/ThemeProvider';
+import Spinner from '../../utils/Spinner';
 
 const AddVehicle = () => {
   const { user, loading: authLoading } = use(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  if (authLoading) {
-    return;
-  }
-
-  if (loading) {
-    return;
+  if (authLoading || loading) {
+    return (
+      <div className="mt-20">
+        <Spinner></Spinner>
+      </div>
+    );
   }
 
   const { email, displayName } = user;

@@ -29,13 +29,23 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
+        <NavLink to="/about-us" className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'}`}>
+          About Us
+        </NavLink>
+      </li>
+      <li>
         <NavLink to="/contact-us" className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'}`}>
           Contact Us
         </NavLink>
       </li>
       <li>
+        <Link to="/dashboard" className="navlink-style inActive-style">
+          Dashboard
+        </Link>
+      </li>
+      <li>
         <NavLink
-          to="/add-vehicle"
+          to="/dashboard/add-vehicle"
           className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
         >
           Add Vehicle
@@ -43,7 +53,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/my-vehicles"
+          to="/dashboard/my-vehicles"
           className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
         >
           My Vehicles
@@ -65,6 +75,8 @@ const Navbar = () => {
   const handleUserSignout = () => {
     UserSignOut()
       .then(() => {
+        localStorage.removeItem('user-role');
+        localStorage.removeItem('user-email');
         notifySuccess('👋 You’ve been logged out successfully. See you next time on Voyago!');
       })
       .catch((error) => {

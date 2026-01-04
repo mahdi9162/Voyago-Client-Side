@@ -14,6 +14,7 @@ import UpdateVehicle from '../Pages/Vehicles/UpdateVehicle';
 import NotFound from '../Pages/Error/NotFound';
 import ContactUs from '../Pages/Home/Sections/ContactUs';
 import AboutUs from '../Pages/Footer/AboutUs';
+import DashboardLayout from '../layouts/dashLayout/DashboardLayout';
 
 export const router = createBrowserRouter([
   {
@@ -27,22 +28,6 @@ export const router = createBrowserRouter([
       {
         path: '/all-vehicles',
         Component: AllVehicles,
-      },
-      {
-        path: '/add-vehicle',
-        element: (
-          <PrivateRoute>
-            <AddVehicle></AddVehicle>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: '/my-vehicles',
-        element: (
-          <PrivateRoute>
-            <MyVehicles></MyVehicles>
-          </PrivateRoute>
-        ),
       },
       {
         path: '/my-bookings',
@@ -83,6 +68,29 @@ export const router = createBrowserRouter([
       {
         path: '*',
         Component: NotFound,
+      },
+    ],
+  },
+  // Dashboard
+  {
+    path: '/dashboard',
+    Component: DashboardLayout,
+    children: [
+      {
+        path: '/dashboard/add-vehicle',
+        element: (
+          <PrivateRoute>
+            <AddVehicle></AddVehicle>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/my-vehicles',
+        element: (
+          <PrivateRoute>
+            <MyVehicles></MyVehicles>
+          </PrivateRoute>
+        ),
       },
     ],
   },
