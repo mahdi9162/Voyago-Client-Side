@@ -168,7 +168,7 @@ const HostDashHome = () => {
                   key={v?._id}
                   className="
             group relative
-            rounded-2xl border border-white/10 bg-white/3
+            rounded-2xl border border-gray-400/30 bg-white/3
             p-4 transition-all duration-300
             hover:bg-(--bg-secondary)/50 hover:border-(--accent-cyan)/30
             sm:hover:translate-x-1

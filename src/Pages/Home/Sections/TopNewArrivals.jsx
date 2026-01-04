@@ -11,6 +11,7 @@ const TopNewArrivals = () => {
   const { theme } = use(ThemeContext);
   const { vehicles, loading, error } = useVehicles('https://voyago-server-side.vercel.app/latest-vehicles/');
   const latestVehicles = vehicles.data;
+  console.log(latestVehicles);
 
   if (loading) {
     return (

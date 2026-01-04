@@ -1,22 +1,21 @@
-import React, { use, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Container from '../../components/container/Container';
 import { AuthContext } from '../../context/AuthProvider';
 import axios from 'axios';
 import { notifyError, notifySuccess } from '../../utils/toastService';
 import { Link, useNavigate } from 'react-router';
 import previewCarImg from '../../assets/images/previewCar.jpg';
-import { ThemeContext } from '../../context/ThemeProvider';
 import Spinner from '../../utils/Spinner';
 
 const AddVehicle = () => {
-  const { user, loading: authLoading } = use(AuthContext);
+  const { user, loading: authLoading } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   if (authLoading || loading) {
     return (
       <div className="mt-20">
-        <Spinner></Spinner>
+        <Spinner />
       </div>
     );
   }
@@ -27,50 +26,32 @@ const AddVehicle = () => {
     e.preventDefault();
     const form = e.target;
 
-    // Form Data
-    const vehicleName = form.name.value;
-    const vehicleModel = form.model.value;
-    const userEmail = email;
-    const ownerName = displayName;
-    const category = form.category.value;
-    const location = form.location.value;
-    const fuelType = form.fuelType.value;
-    const transmission = form.transmission.value;
-    const pricePerDay = form.price.value;
-    const seats = form.seat.value;
-    const coverImage = form.photoURL.value;
-    const availability = form.availability.value;
-    const description = form.description.value;
-    const features = form.features.value.split(',').map((feature) => feature.trim());
-    const createdAt = new Date().toISOString();
-
-    // Object Data
     const vehicleData = {
-      vehicleName,
-      vehicleModel,
-      userEmail,
-      ownerName,
-      category,
-      location,
-      fuelType,
-      transmission,
-      pricePerDay,
-      seats,
-      coverImage,
-      availability,
-      description,
-      features,
-      createdAt,
+      vehicleName: form.name.value,
+      vehicleModel: form.model.value,
+      userEmail: email,
+      ownerName: displayName,
+      category: form.category.value,
+      location: form.location.value,
+      fuelType: form.fuelType.value,
+      transmission: form.transmission.value,
+      pricePerDay: form.price.value,
+      seats: form.seat.value,
+      coverImage: form.photoURL.value,
+      availability: form.availability.value,
+      description: form.description.value,
+      features: form.features.value.split(',').map((f) => f.trim()),
+      createdAt: new Date().toISOString(),
     };
 
     try {
-      const response = await axios.post('https://voyago-server-side.vercel.app/vehicles', vehicleData);
       setLoading(true);
+      await axios.post('https://voyago-server-side.vercel.app/vehicles', vehicleData);
       notifySuccess('Your vehicle is now live on Voyago! 🎉');
       form.reset();
       navigate('/dashboard/my-vehicles');
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       notifyError('Couldn’t add the vehicle. Please try again.');
     } finally {
       setLoading(false);
@@ -78,260 +59,117 @@ const AddVehicle = () => {
   };
 
   return (
-    <>
-      <section className="mt-10 mb-20 px-3 lg:px-0">
-        <Container>
-          {/* Header */}
-          <div className="mb-10 flex flex-col lg:flex-row text-center lg:text-left items-center bg-accent/10 rounded-2xl p-4 justify-between gap-4">
-            <div>
-              <h2 data-aos="fade-right" className="text-xl md:text-2xl font-semibold text-(--text-primary)">
-                Add a new vehicle
-              </h2>
-              <p data-aos="fade-right" data-aos-delay="80" className="mt-1 text-xs md:text-base text-(--text-muted)/70">
-                Fill in the details below to list your vehicle on Voyago.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2 rounded-full bg-(--accent-cyan)/20 px-4 py-2 text-xs md:text-sm text-(--text-muted) border border-white/10">
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-(--accent)/20 text-(--accent) text-xs font-semibold">
-                •
-              </span>
-              <span className="font-medium text-(--text-primary)">Logged in as</span>
-              <span className="text-xs md:text-sm text-(--text-muted)">{email}</span>
-            </div>
+    <section className="mt-6 mb-16 px-2 sm:px-3">
+      <Container>
+        {/* Header */}
+        <div className="mb-6 flex flex-col lg:flex-row gap-4 items-center justify-between bg-(--accent-cyan)/10 rounded-2xl p-4">
+          <div>
+            <h2 className="text-lg sm:text-xl font-semibold text-(--text-primary)">
+              Add a new vehicle
+            </h2>
+            <p className="text-xs sm:text-sm text-(--text-muted)">
+              Fill in the details below to list your vehicle.
+            </p>
           </div>
 
-          {/* Main glass panel */}
-          <div
-            data-aos="fade-up"
-            data-aos-delay="120"
-            className="
-        rounded-3xl 
-    bg-(--bg-secondary)/60
-    border border-white/10
-    shadow-xl backdrop-blur-xl
-        px-6 py-8 md:px-10 md:py-10
-      "
-          >
-            {/* Form */}
-            <form onSubmit={handleaAddVehicle}>
-              <div className="flex flex-col lg:flex-row gap-10 lg:gap-12">
-                {/* LEFT: Form side */}
-                <div className="flex-1 space-y-10">
-                  {/* Basic Vehicle Info */}
+          <div className="text-xs sm:text-sm rounded-full bg-(--accent-cyan)/20 px-4 py-2 border border-white/10">
+            Logged in as <span className="font-semibold">{email}</span>
+          </div>
+        </div>
+
+        {/* MAIN CARD */}
+        <div className="rounded-3xl bg-(--bg-secondary)/60 border border-white/10 backdrop-blur-xl p-4 sm:p-6 lg:p-8">
+          <form onSubmit={handleaAddVehicle}>
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* LEFT */}
+              <div className="flex-1 space-y-8">
+                {/* Basic Info */}
+                <div>
+                  <h3 className="text-base font-semibold">Basic Vehicle Info</h3>
+
+                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {[
+                      ['Vehicle Name', 'name', 'Toyota'],
+                      ['Model / Trim', 'model', 'Corolla Altis'],
+                      ['Category', 'category', 'SUV, Sedan'],
+                      ['Location', 'location', 'Los Angeles, CA'],
+                      ['Fuel Type', 'fuelType', 'Hybrid, Petrol'],
+                      ['Transmission', 'transmission', 'Automatic'],
+                    ].map(([label, name, ph]) => (
+                      <div key={name}>
+                        <label className="text-xs text-(--text-muted)">{label}</label>
+                        <input
+                          name={name}
+                          required
+                          placeholder={ph}
+                          className="mt-1 w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2 text-sm"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Pricing */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-(--text-primary)">Basic Vehicle Info</h3>
-                    <p className="text-xs md:text-sm text-(--text-muted) mt-1">Provide the essential details of the vehicle.</p>
-
-                    <div className="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                      <div className="space-y-1">
-                        <label className="text-xs uppercase tracking-wide text-(--text-muted)">Vehicle Name *</label>
-                        <input
-                          className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                          placeholder="e.g. Toyota"
-                          type="text"
-                          name="name"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-xs uppercase tracking-wide text-(--text-muted)">Model / Trim *</label>
-                        <input
-                          className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                          placeholder="Corolla Altis"
-                          type="text"
-                          name="model"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-xs uppercase tracking-wide text-(--text-muted)">Category *</label>
-                        <input
-                          className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                          placeholder="SUV, Sedan, Electric..."
-                          type="text"
-                          name="category"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-xs uppercase tracking-wide text-(--text-muted)">Location *</label>
-                        <input
-                          className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                          placeholder="Los Angeles, CA"
-                          type="text"
-                          name="location"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-xs uppercase tracking-wide text-(--text-muted)">Fuel Type</label>
-                        <input
-                          className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                          placeholder="Hybrid, Petrol, Electric..."
-                          type="text"
-                          name="fuelType"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-xs uppercase tracking-wide text-(--text-muted)">Transmission</label>
-                        <input
-                          className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                          placeholder="Automatic / Manual"
-                          type="text"
-                          name="transmission"
-                          required
-                        />
-                      </div>
-                    </div>
+                    <label className="text-xs text-(--text-muted)">Price / Day</label>
+                    <input name="price" type="number" required className="w-full rounded-xl bg-(--accent-cyan)/20 px-4 py-2 text-sm" placeholder='150$'/>
                   </div>
-
-                  {/* Pricing & specs */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="text-sm font-semibold text-(--text-primary)">Pricing & Capacity</h4>
-                      <div className="mt-3 grid grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="text-xs uppercase tracking-wide text-(--text-muted)">Price per day (USD)</label>
-                          <input
-                            className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                            placeholder="120"
-                            type="number"
-                            name="price"
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-1">
-                          <label className="text-xs uppercase tracking-wide text-(--text-muted)">Seats</label>
-                          <input
-                            className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                            placeholder="5"
-                            type="number"
-                            name="seat"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="mt-4 space-y-1">
-                        <label className="text-xs uppercase tracking-wide text-(--text-muted)">Availability</label>
-                        <input
-                          className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                          placeholder="Available / Unavailable"
-                          type="text"
-                          name="availability"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-sm font-semibold text-(--text-primary)">Media</h4>
-                      <div className="mt-3 space-y-1">
-                        <label className="text-xs uppercase tracking-wide text-(--text-muted)">Cover Image URL</label>
-                        <input
-                          className="w-full rounded-xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-2.5 text-sm text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                          placeholder="https://..."
-                          type="text"
-                          name="photoURL"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="text-sm font-semibold text-(--text-primary)">Description</h4>
-                      <p className="text-xs text-(--text-muted) mt-1">Write a short description of the vehicle.</p>
-                      <textarea
-                        rows={4}
-                        className="mt-3 w-full rounded-2xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-3 text-sm text-(--text-primary) placeholder:text-(--text-muted) resize-none focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                        placeholder="E.g. Smooth hybrid sedan, perfect for city trips and weekend getaways."
-                        name="description"
-                        required
-                      />
-                    </div>
-                    {/* Key Features */}
-                    <div>
-                      <h4 className="text-sm font-semibold text-(--text-primary)">Key Features</h4>
-                      <p className="text-xs text-(--text-muted) mt-1">Comma separated features (e.g. Bluetooth, Sport Mode).</p>
-                      <textarea
-                        rows={4}
-                        className="mt-3 w-full rounded-2xl bg-(--accent-cyan)/20 border border-white/10 px-4 py-3 text-sm text-(--text-primary) placeholder:text-(--text-muted) resize-none focus:outline-none focus:ring-2 focus:ring-(--accent)/70 focus:border-(--accent)"
-                        placeholder="Premium audio, Sunroof, Wireless CarPlay"
-                        name="features"
-                        required
-                      />
-                    </div>
+                  <div>
+                    <label className="text-xs text-(--text-muted)">Seats</label>
+                    <input name="seat" type="number" required className="w-full rounded-xl bg-(--accent-cyan)/20 px-4 py-2 text-sm" placeholder='6'/>
                   </div>
                 </div>
 
-                {/* RIGHT: Host + Preview */}
-                <div className="w-full lg:w-[32%] space-y-6">
-                  {/* Host info */}
-                  <div className="rounded-2xl border border-white/10 bg-(--accent-cyan)/20 px-5 py-4 shadow-lg">
-                    <h3 className="text-sm font-semibold text-(--text-primary)">Host Info</h3>
-                    <p className="mt-1 text-xs text-(--text-muted)">These details are pulled from your account.</p>
+                {/* Media + Description */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input name="photoURL" placeholder="Image URL" className="rounded-xl bg-(--accent-cyan)/20 px-4 py-2 text-sm" />
+                  <input name="availability" placeholder="Available / Unavailable" className="rounded-xl bg-(--accent-cyan)/20 px-4 py-2 text-sm" />
+                </div>
 
-                    <div className="mt-4 space-y-1 text-sm">
-                      <p>
-                        <span className="font-medium text-(--text-primary)">Owner:</span>{' '}
-                        <span className="text-(--text-muted)">{displayName}</span>
-                      </p>
-                      <p>
-                        <span className="font-medium text-(--text-primary)">Email:</span>{' '}
-                        <span className="text-(--text-muted)">{email}</span>
-                      </p>
-                    </div>
-                  </div>
+                <textarea
+                  name="description"
+                  rows={4}
+                  placeholder="Vehicle description"
+                  className="w-full rounded-2xl bg-(--accent-cyan)/20 px-4 py-3 text-sm"
+                />
 
-                  {/* Preview card */}
-                  <div
-                    data-aos="zoom-in"
-                    data-aos-delay="200"
-                    className="rounded-2xl border border-white/10 bg-(--accent-cyan)/20 px-5 py-5 shadow-lg"
-                  >
-                    <h3 className="text-sm font-semibold text-(--text-primary)">Preview Card</h3>
+                <textarea
+                  name="features"
+                  rows={3}
+                  placeholder="Bluetooth, Sunroof"
+                  className="w-full rounded-2xl bg-(--accent-cyan)/20 px-4 py-3 text-sm"
+                />
+              </div>
 
-                    <div className="mt-3 overflow-hidden rounded-2xl bg-black/40">
-                      <img src={previewCarImg} alt="Vehicle preview" className="h-40 w-full object-cover" />
-                    </div>
+              {/* RIGHT – mobile friendly */}
+              <div className="w-full lg:w-[32%] space-y-5">
+                <div className="rounded-2xl bg-(--accent-cyan)/15 p-4 border border-white/10">
+                  <h4 className="text-sm font-semibold">Host Info</h4>
+                  <p className="text-xs mt-1">{displayName}</p>
+                  <p className="text-xs opacity-70">{email}</p>
+                </div>
 
-                    <div className="mt-4 space-y-1 text-sm">
-                      <p className="font-semibold text-(--text-primary)">Tesla Model 3 Long-Range</p>
-                      <p className="text-xs text-(--text-muted)">Los Angeles, CA • Electric • $120/day</p>
-                      <p className="text-xs text-(--text-muted)/70 mt-4">* This is how your vehicle will appear on Voyago.</p>
-                    </div>
-                  </div>
+                <div className="rounded-2xl bg-(--accent-cyan)/15 p-4 border border-white/10">
+                  <h4 className="text-sm font-semibold mb-2">Preview</h4>
+                  <img src={previewCarImg} className="rounded-xl w-full h-40 object-cover" />
                 </div>
               </div>
-              {/* Buttons */}
-              <div className="mt-8 flex items-center justify-end gap-4">
-                <Link
-                  to="/my-vehicles"
-                  type="button"
-                  className="rounded-full border bg-(--accent-cyan)/20 px-6 py-2.5 text-sm font-medium text-(--text-muted) hover:bg-red-400 hover:text-white transition cursor-pointer"
-                >
-                  Cancel
-                </Link>
-                <button className="rounded-full bg-(--accent) px-7 py-2.5 text-sm font-semibold text-white shadow-[0_18px_60px_rgba(34,211,238,0.7)] hover:bg-(--accent-cyan) transition active:scale-95 cursor-pointer">
-                  Add Vehicle
-                </button>
-              </div>
-            </form>
-          </div>
-        </Container>
-      </section>
-    </>
+            </div>
+
+            {/* ACTIONS */}
+            <div className="mt-6 flex justify-end gap-3">
+              <Link to="/dashboard/my-vehicles" className="px-6 py-2 rounded-full border text-sm">
+                Cancel
+              </Link>
+              <button className="px-6 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold">
+                Add Vehicle
+              </button>
+            </div>
+          </form>
+        </div>
+      </Container>
+    </section>
   );
 };
 

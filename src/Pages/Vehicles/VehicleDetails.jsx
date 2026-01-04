@@ -126,7 +126,7 @@ const VehicleDetails = () => {
       await axios.post('https://voyago-server-side.vercel.app/bookings', bookingData);
       notifySuccess('Ride request sent! Your host will respond shortly.💖');
       form.reset();
-      navigate('/my-bookings');
+      navigate('/dashboard/my-bookings');
     } catch (error) {
       console.error('BOOKING ERROR:', error);
       notifyError('Something went wrong.Please try again in a moment.😕');

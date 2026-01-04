@@ -55,7 +55,7 @@ const MyProfile = () => {
   // Common border class for light/dark mode visibility
   const dynamicBorder = 'border border-slate-200 dark:border-white/10';
   const dynamicInput =
-    'w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 sm:px-5 py-3 text-sm focus:outline-none focus:border-(--accent-cyan)/50 dark:focus:border-(--accent-cyan)/40 transition-all';
+    'w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 sm:px-5 py-3 text-sm focus:outline-none focus:border-(--accent-cyan)/50 dark:focus:border-(--accent-cyan)/40 transition-all text-black/70';
 
   return (
     <motion.div
