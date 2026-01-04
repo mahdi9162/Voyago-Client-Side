@@ -27,6 +27,7 @@ const useBookings = () => {
         const response = await axios.get(url);
         setBookings(response.data);
       } catch (er) {
+        console.log(er);
       } finally {
         setLoading(false);
       }

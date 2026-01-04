@@ -27,6 +27,7 @@ const useMyVehicles = () => {
         const response = await axios.get(url);
         setMyVehicles(response.data);
       } catch (error) {
+        console.log(error);
       } finally {
         setLoading(false);
       }
