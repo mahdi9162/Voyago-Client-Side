@@ -68,7 +68,7 @@ const AddVehicle = () => {
       setLoading(true);
       notifySuccess('Your vehicle is now live on Voyago! 🎉');
       form.reset();
-      navigate('/my-vehicles');
+      navigate('/dashboard/my-vehicles');
     } catch (error) {
       console.log(error);
       notifyError('Couldn’t add the vehicle. Please try again.');

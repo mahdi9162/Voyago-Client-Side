@@ -183,6 +183,14 @@ const UserDashHome = () => {
                   />
                 </PieChart>
               </ResponsiveContainer>
+
+              {/* center text */}
+              <div className="pointer-events-none absolute inset-0 grid place-items-center">
+                <div className="text-center">
+                  <p className="text-2xl sm:text-3xl font-bold text-(--text-primary)">{total}</p>
+                  <p className="text-[10px] sm:text-[11px] font-bold text-(--text-muted) uppercase tracking-widest opacity-70">Bookings</p>
+                </div>
+              </div>
             </div>
           )}
         </div>
