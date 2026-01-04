@@ -15,6 +15,8 @@ import NotFound from '../Pages/Error/NotFound';
 import ContactUs from '../Pages/Home/Sections/ContactUs';
 import AboutUs from '../Pages/Footer/AboutUs';
 import DashboardLayout from '../layouts/dashLayout/DashboardLayout';
+import DashboardHome from '../Pages/Dashboard/DashboardHome/DashboardHome';
+import MyProfile from '../Pages/Dashboard/MyProfile/MyProfile';
 
 export const router = createBrowserRouter([
   {
@@ -28,14 +30,6 @@ export const router = createBrowserRouter([
       {
         path: '/all-vehicles',
         Component: AllVehicles,
-      },
-      {
-        path: '/my-bookings',
-        element: (
-          <PrivateRoute>
-            <MyBookings></MyBookings>
-          </PrivateRoute>
-        ),
       },
       {
         path: '/login',
@@ -76,6 +70,8 @@ export const router = createBrowserRouter([
     path: '/dashboard',
     Component: DashboardLayout,
     children: [
+      { index: true, Component: DashboardHome },
+
       {
         path: '/dashboard/add-vehicle',
         element: (
@@ -89,6 +85,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyVehicles></MyVehicles>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/my-bookings',
+        element: (
+          <PrivateRoute>
+            <MyBookings></MyBookings>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/my-profile',
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
           </PrivateRoute>
         ),
       },

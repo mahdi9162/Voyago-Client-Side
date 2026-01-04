@@ -30,8 +30,8 @@ const Login = () => {
 
   // Demo credentials
   const DEMO = {
-    user: { email: 'john@gmail.com', password: 'Mahdi16' },
-    admin: { email: 'demo.admin@voyago.com', password: 'Admin@12345' },
+    user: { email: 'wednesday@gmail.com', password: 'Mahdi16' },
+    host: { email: 'hasina@gmail.com', password: 'Mahdi16' },
   };
 
   const handleFillDemo = (role) => {
@@ -41,7 +41,7 @@ const Login = () => {
     if (emailRef.current) emailRef.current.value = creds.email;
     if (passRef.current) passRef.current.value = creds.password;
     setPasswordError('');
-    notifySuccess(`${role === 'admin' ? 'Admin' : 'User'} demo credentials filled ✅`);
+    notifySuccess(`${role === 'host' ? 'Host' : 'User'} demo credentials filled ✅`);
   };
 
   const handleEmailPassLogin = (e) => {
@@ -263,13 +263,13 @@ const Login = () => {
 
                             <button
                               type="button"
-                              onClick={() => handleFillDemo('admin')}
+                              onClick={() => handleFillDemo('host')}
                               className="flex-1 sm:flex-none px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider 
                      transition-all duration-300 active:scale-95 cursor-pointer
                      bg-(--accent-purple)/10 text-(--accent-purple) border border-(--accent-purple)/30
                      hover:bg-(--accent-purple) hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]"
                             >
-                              Admin
+                              Host
                             </button>
                           </div>
                         </div>

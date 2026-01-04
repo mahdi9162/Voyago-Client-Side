@@ -44,7 +44,7 @@ const MyVehicles = () => {
 
         {/* Button */}
         <Link
-          to="/all-vehicles"
+          to="/dashboard/add-vehicle"
           className="mt-2 text-sm px-4 py-2 rounded-full bg-(--accent) text-white 
                shadow-[0_6px_20px_rgba(34,211,238,0.35)] 
                hover:bg-(--accent-cyan) transition-all duration-500 active:scale-95"

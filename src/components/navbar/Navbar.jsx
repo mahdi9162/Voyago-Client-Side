@@ -8,13 +8,15 @@ import ThemeToggle from '../ui/ThemeToggle';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { AuthContext } from '../../context/AuthProvider';
 import { notifyError, notifySuccess } from '../../utils/toastService';
-import { Link as ScrollLink } from 'react-scroll';
+import getUserRole from '../../utils/getUserRole';
 
 const Navbar = () => {
   const { theme } = use(ThemeContext);
   const { UserSignOut, user, loading } = use(AuthContext);
   const [avatarError, setAvatarError] = useState(false);
   const avatarLetter = (user?.displayName || 'U').charAt(0);
+
+  const role = getUserRole();
 
   const links = (
     <>
@@ -28,6 +30,41 @@ const Navbar = () => {
           All Vehicles
         </NavLink>
       </li>
+      {/* users - my bookings */}
+      {role === 'user' && (
+        <>
+          <li>
+            <NavLink
+              to="/dashboard/my-bookings"
+              className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
+            >
+              My Bookings
+            </NavLink>
+          </li>
+        </>
+      )}
+
+      {role === 'host' && (
+        <>
+          <li>
+            <NavLink
+              to="/dashboard/add-vehicle"
+              className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
+            >
+              Add Vehicle
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/my-vehicles"
+              className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
+            >
+              My Vehicles
+            </NavLink>
+          </li>
+        </>
+      )}
+
       <li>
         <NavLink to="/about-us" className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'}`}>
           About Us
@@ -39,33 +76,9 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <Link to="/dashboard" className="navlink-style inActive-style">
+        <Link to="/dashboard" className={`navlink-style inActive-style ${user ? 'inline' : 'hidden'}`}>
           Dashboard
         </Link>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/add-vehicle"
-          className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
-        >
-          Add Vehicle
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/my-vehicles"
-          className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
-        >
-          My Vehicles
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/my-bookings"
-          className={({ isActive }) => `navlink-style ${isActive ? 'active-style' : 'inActive-style'} ${user ? 'inline' : 'hidden'}`}
-        >
-          My Bookings
-        </NavLink>
       </li>
     </>
   );
